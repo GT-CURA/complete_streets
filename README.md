@@ -5,6 +5,7 @@ complete-street/
 │
 ├── README.md                 # High-level description, workflow diagram, quickstart
 ├── LICENSE
+├── environment.yml
 │
 ├── inputs/                   # Example input files (toy data, not real study area)
 │   ├── amenities_test.geojson
@@ -32,13 +33,12 @@ complete-street/
 │
 │
 ├── step1_preprocessing/      # Code for generating 4 geojsons from user inputs
-│   ├── environment.yml
 │   ├── generate_points_lines.py
 │   └── README.md
 │
 ├── step2_elements/           # Each element has its own folder + env
 │   ├── bike_lane/
-│   │   ├── environment.yml
+│   │   ├── environment_bike_lane.yml
 │   │   ├── bike_lanes.py
 │   │   ├── trained_model.pt
 │   │   └── README.md
