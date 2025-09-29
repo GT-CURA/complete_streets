@@ -2,10 +2,10 @@
 This repository contains the code and datasets used to load locations for evaluating the Complete Street Score, identify and measure eight key Complete Street elements, and assign weights to each element using LLM/NLP techniques.
 
 ## 📂 Repository Structure
-
+```
 complete-street/
 │
-├── README.md                 # High-level description, workflow diagram, quickstart
+├── README.md # High-level description, workflow diagram, quickstart
 ├── LICENSE
 ├── environment.yml
 │
@@ -52,12 +52,8 @@ complete-street/
 │   ├── transit_access/
 │   └── shade/
 │
-├── step3_scoring/            # Code to integrate 8 inventories + compute final score
-│   ├── environment.yml
-│   ├── integrate_inventories.py
-│   └── calculate_score.py
-│
-└── utils/                    # Shared helper functions
-    ├── geoutils.py
-    ├── io.py
-    └── viz.py
+└── step3_scoring/            # Code to integrate 8 inventories + compute final score
+    ├── environment.yml
+    ├── integrate_inventories.py
+    └── calculate_score.py
+```
