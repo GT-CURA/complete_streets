@@ -1,21 +1,45 @@
-# Overview
-This repository contains the code and datasets used to load locations for evaluating the Complete Street Score, identify and measure eight key Complete Street elements, and assign weights to each element using LLM/NLP techniques.
+This repository contains the code and example datasets for evaluating the Complete Street Score. 
+The workflow identifies and measures eight key Complete Street elements, then integrates them into a composite score using metrics derived from complete street design guidelines.
 
 Diagram #1
 
-Please note, you will require different conda environment to identify ~~~ for the use of Computer Vision. We recommend you to use specific you may need,,, We hope to make this as a package but, since it integrates several steps and funcitons, can't make it :(
+⚠️ Note: Some elements (e.g., street parking, sidewalk) require specialized conda environments with computer vision dependencies. Each element folder includes its own environment.yml. You only need to install and run the environments relevant to your use case.
 
-# Quick Start
-## 1. Create ~~~ [step1_preprocssing]
-You can put multiple interested points at the same time either by, make sure 
+We plan to release this as a Python package in the future. For now, the project is organized into modular steps that can be run independently or combined into a full pipeline.
 
-## 2. Collect attributes of elements [step2_elements]
-There are eight different elements meaning eight subfolders under step2_elements folder. You can use the process you may want to collect. No need to run all those codes unless you have alternate datasets. For example, if you know the types and locations of bike lane in your interested area, then skip it!. 
+# ✨ Features
 
-Each element will return its own unique csv that contains attribute so please follow the instructions found in each folder.
+- Modular design with three main steps:
+    - Preprocess input points to return lines/points corresponding to interested road segment that can be used for collecting attributes of street elements
+    - Collection of eight element inventories
+    - Integration into a final Complete Street Score
+- Flexible: skip elements if you already have alternate datasets
+- Sample inputs and outputs for quick testing
+
+# 🚀 Quick Guide with Example
+## 1. Create base road segment data (step1_preprocssing)
+Provide one or more points of interest (lat/lon). The script generates the followings with two different projections:
+Points along the road segment
+Corresponding line representations
+
+Example:
+
+
+## 2. Collect element attributes (step2_elements)
+There are eight element folders under step2_elements/.
+Each contains its own workflow and environment:
+
+Run the scripts for the elements you want to measure.
+
+Skip elements if you already have equivalent data (e.g., if your city provides a bike lane shapefile).
+
+Each element produces a CSV describing its attributes for each road segment.
+Instructions are included in each folder.
 
 ## 3. Calculate the completeness score [step3_scoring]
-As of you collect all eight elements (it's okay you skip some elements), you need to integrate the files into one and calculate the completeness score for each road segment using our metrics developed for evaluating completeness score based on various complete street design guide books. Of course, you can find out more details in the folder as well.
+Once you have collected outputs (from all or some elements), integrate them and calculate the Complete Street Score:
+
+The score reflects segment-level completeness, following metrics derived from established design guidebooks.
 
 # 📂 Repository Structure
 ```
