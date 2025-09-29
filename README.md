@@ -1,7 +1,23 @@
-# complete_streets
+# Overview
 This repository contains the code and datasets used to load locations for evaluating the Complete Street Score, identify and measure eight key Complete Street elements, and assign weights to each element using LLM/NLP techniques.
 
-## 📂 Repository Structure
+Diagram #1
+
+Please note, you will require different conda environment to identify ~~~ for the use of Computer Vision. We recommend you to use specific you may need,,, We hope to make this as a package but, since it integrates several steps and funcitons, can't make it :(
+
+# Quick Start
+## 1. Create ~~~ [step1_preprocssing]
+You can put multiple interested points at the same time either by, make sure 
+
+## 2. Collect attributes of elements [step2_elements]
+There are eight different elements meaning eight subfolders under step2_elements folder. You can use the process you may want to collect. No need to run all those codes unless you have alternate datasets. For example, if you know the types and locations of bike lane in your interested area, then skip it!. 
+
+Each element will return its own unique csv that contains attribute so please follow the instructions found in each folder.
+
+## 3. Calculate the completeness score [step3_scoring]
+As of you collect all eight elements (it's okay you skip some elements), you need to integrate the files into one and calculate the completeness score for each road segment using our metrics developed for evaluating completeness score based on various complete street design guide books. Of course, you can find out more details in the folder as well.
+
+# 📂 Repository Structure
 ```
 complete-street/
 │
@@ -57,3 +73,5 @@ complete-street/
     ├── integrate_inventories.py
     └── calculate_score.py
 ```
+
+## Quick Guide
