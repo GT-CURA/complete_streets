@@ -10,7 +10,7 @@ We plan to release this as a Python package in the future. For now, the project 
 # ✨ Features
 
 - Modular design with three main steps:
-    - Preprocess input points to return lines/points corresponding to interested road segment that can be used for collecting attributes of street elements
+    - Preprocess input points to generate point and line representations of the target road segments
     - Collection of eight element inventories
     - Integration into a final Complete Street Score
 - Flexible: skip elements if you already have alternate datasets
