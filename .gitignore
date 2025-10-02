@@ -1,0 +1,28 @@
+# macOS system files
+.DS_Store
+
+# R history
+.Rhistory
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Conda / virtual environments
+.env/
+.venv/
+*.conda
+*.egg-info/
+
+# Large data files (optional: ignore if not pushing them)
+*.csv
+*.geojson
+*.pt
+/images/
+/outputs/
+
