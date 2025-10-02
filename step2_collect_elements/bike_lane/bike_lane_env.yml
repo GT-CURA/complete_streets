@@ -1,0 +1,17 @@
+name: bike_lane_env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pytorch=2.5.1
+  - torchvision=0.20.1
+  - torchaudio=2.5.1
+  - pandas=2.2.3
+  - geopandas=1.1.1
+  - pillow=11.1.0
+  - tqdm=4.67.1
+  - requests=2.32.3
+  - transformers=4.51.1
+  - pip:
+    - timm==1.0.15
+
