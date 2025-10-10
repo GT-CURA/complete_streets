@@ -79,21 +79,20 @@ complete-street/
 │   └── README.md
 │
 ├── step2_elements/           # Each element has its own folder + env
+│   ├── amenities/
 │   ├── bike_lane/
 │   │   ├── environment_bike_lane.yml
 │   │   ├── bike_lanes.py
 │   │   ├── trained_model.pt
 │   │   └── README.md
+│   ├── median/
 │   ├── sidewalk/
-│   ├── crossings/
-│   ├── greenery/
-│   ├── lighting/
-│   ├── benches/
-│   ├── transit_access/
-│   └── shade/
+│   ├── street_buffer/
+│   ├── street_parking/
+│   ├── transit_stop/
+│   └── vehicular_road/
 │
 └── step3_scoring/            # Code to integrate 8 inventories + compute final score
-    ├── environment.yml
     ├── integrate_inventories.py
     └── calculate_score.py
 ```
