@@ -55,7 +55,7 @@ complete-street/
 │   └── sample_points.geojson
 │
 ├── outputs/                  # Example outputs (toy outputs for demonstration)
-│   ├── step1_preprocessing/
+│   ├── step1_loader/
 │   │   ├── POINT_EPSG4326.geojson
 │   │   ├── LINE_EPSG4326.geojson
 │   │   ├── POINT_UTMlocal.geojson
@@ -74,7 +74,7 @@ complete-street/
 │
 │
 │
-├── step1_preprocessing/      # Code for generating 4 geojsons from user inputs
+├── step1_loader/      # Code for generating 4 geojsons from user inputs
 │   ├── generate_points_lines.py
 │   └── README.md
 │
