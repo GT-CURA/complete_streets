@@ -1,7 +1,7 @@
 ######################################
 # ✅ Please change the followings
 """The directory where this code file is located. Be sure that the input location file and classifcation model's checkpoint file are also in this directory"""
-WORK_DIR = ""
+WORK_DIR = "/your/path"
 
 """Your Google API key that enables downloading the street view imagery and satellite imagery"""
 """You should enable your key to 'Street View Static API' and 'Map Tiles API' in your Google Cloud project"""
