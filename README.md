@@ -49,12 +49,12 @@ complete-street/
 ├── LICENSE
 ├── environment.yml
 │
-├── inputs/                   # Example input files (toy data, not real study area)
+├── example_inputs/                   # Example input files (toy data, not real study area)
 │   ├── amenities_test.geojson
 │   ├── GTFS_test
 │   └── sample_points.geojson
 │
-├── outputs/                  # Example outputs (toy outputs for demonstration)
+├── example_outputs/                  # Example outputs (toy outputs for demonstration)
 │   ├── step1_loader/
 │   │   ├── POINT_EPSG4326.geojson
 │   │   ├── LINE_EPSG4326.geojson
