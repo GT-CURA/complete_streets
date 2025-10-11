@@ -1,11 +1,11 @@
 ######################################
 # ✅ Please change the followings
 """The directory where this code file is located. Be sure that the input location file and classifcation model's checkpoint file are also in this directory"""
-WORK_DIR = "/home/slieu3/CS_bikelane/for_GIT"
+WORK_DIR = ".."
 
 """Your Google API key that enables downloading the street view imagery and satellite imagery"""
 """You should enable your key to 'Street View Static API' and 'Map Tiles API' in your Google Cloud project"""
-API_KEY = "AIzaSyCwSEFU05dx0Nbe2ZB5Kiio0_Y1okyCYwM"
+API_KEY = "YOUR_API_KEY"
 
 
 ######################################
@@ -15,8 +15,8 @@ import geopandas as gpd
 import pandas as pd
 from tqdm import tqdm
 
-CHECKPOINT_PATH = os.path.join(WORK_DIR, "BEST_MULTISEED_DecisionFusion_Hier_latefusion_fov120pitch30_seed2027.pt")
-POINTS_FILE = os.path.join(WORK_DIR, "top_10_road_segments_v3.0_pano_TEMP.geojson")
+CHECKPOINT_PATH = os.path.join(WORK_DIR, "bike_lane_classification.pt")
+POINTS_FILE = os.path.join(WORK_DIR, "POINT_EPSG4326.geojson")
 
 # Check if checkpoint file exists
 if os.path.exists(CHECKPOINT_PATH):
