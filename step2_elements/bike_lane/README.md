@@ -14,17 +14,20 @@ This repository provides a **multimodal deep learning framework** to detect and 
 
 
 ## 📦 Features:
-- **`.pt`**  
-  Pretrained model checkpoint (PyTorch). Includes separate backbones for each modality (Street View 1, Street View 2, Satellite) and a decision-level hierarchical fusion head.  
+- **`POINT_EPSG4326.geojson`**
+  Example input file (5 sample points in Atlanta). Replace with your own points of interest.
+
+- **`bike_lane_classification.pt`**  
+  Pretrained model checkpoint (PyTorch) with separate backbones for each modality (Street View 1, Street View 2, Satellite). Find more details below.
 
 - **`bike_lane_env.yml`**  
   Conda environment specification with pinned package versions for reproducible setup.  
 
 - **`/images/`**  
-  Folder automatically generated to store downloaded Street View and satellite images.  
+  Automatically created folder for downloaded Street View and satellite imagery. 
 
 - **`/outputs/`**  
-  Folder automatically generated to store final predictions (CSV files).  
+  Automatically created folder for storing classification results.  
 
 - **Python scripts (`classify_bikelanes.py`)**  
   - *Block 0*: Setup and load input GeoJSON  
@@ -41,7 +44,7 @@ This repository provides a **multimodal deep learning framework** to detect and 
    ```
 
 2. **Prepare input data**
-  - Place your road segment GeoJSON file (generated via step1_loader) into the working directory
+  - Place your road segment GeoJSON file (generated via step1_loader) in the working directory, or use the provided toy dataset for testing.
   - Open classify_bikelanes.py and edit:
     - [Line 4] Set the working directory where .py, .yml, .pt, and the GeoJSON file are stored.
     - [Line 8] Enter your Google API Key (enabled for Street View Static API and Map Tiles API) to allow imagery downloads.
