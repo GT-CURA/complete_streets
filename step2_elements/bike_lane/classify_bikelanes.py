@@ -15,7 +15,7 @@ import geopandas as gpd
 import pandas as pd
 from tqdm import tqdm
 
-CHECKPOINT_PATH = os.path.join(WORK_DIR, "bike_lane_classification.pt")
+CHECKPOINT_PATH = os.path.join(WORK_DIR, "bike_lane_classification_min_fp16.pt")
 POINTS_FILE = os.path.join(WORK_DIR, "POINT_EPSG4326.geojson")
 
 # Check if checkpoint file exists
