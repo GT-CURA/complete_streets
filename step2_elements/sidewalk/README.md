@@ -56,6 +56,7 @@ The pipeline uses a configuration and checkpoint from the OpenMMLab MMSegmentati
   
    # Download the weights into that directory
    wget -P checkpoints/ https://download.openmmlab.com/mmsegmentation/v0.5/segformer/segformer_mit-b5_8x1_1024x1024_160k_cityscapes/segformer_mit-b5_8x1_1024x1024_160k_cityscapes_20211206_072934-87a052ec.pth
+   ```
 
 3. **Prepare input data**
   - Place your road segment GeoJSON file (generated via step1_loader) in the working directory, or use the provided toy dataset for testing.
