@@ -74,7 +74,7 @@ python classify_bikelanes.py
 ```
 
 ## 🔎 Descriptions
-The pretrained model provided in this repository is the top-performing architecture identified in the research, achieving the highest classification accuracy (88.6%) and F1-score (0.855). It employs a multimodal approach that integrates ground-level and aerial perspectives to create a robust and accurate classification framework.
+The pretrained model provided in this repository is the top-performing architecture identified in the research, achieving the highest classification accuracy (90.4%) and F1-score (0.871). It employs a multimodal approach that integrates ground-level and aerial perspectives to create a robust and accurate classification framework.
 
 The model's architecture is defined by three key dimensions: a late-stage concatenation, decision-level fusion, and a hierarchical label structure.
 
