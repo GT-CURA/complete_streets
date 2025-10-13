@@ -74,7 +74,21 @@ python classify_bikelanes.py
 ```
 
 ## 🔎 Descriptions
+The pretrained model provided in this repository is the top-performing architecture identified in the research, achieving the highest classification accuracy (88.6%) and F1-score (0.855). It employs a multimodal approach that integrates ground-level and aerial perspectives to create a robust and accurate classification framework.
 
+The model's architecture is defined by three key dimensions: a late-stage concatenation, decision-level fusion, and a hierarchical label structure.
+
+![Alt text for accessibility](fig/overview_bike_lane.png)
+
+**Key Architectural Features:**
+  - ***Input Modalities***: The model processes three co-located images for each road segment: two Google Street View images captured from opposite directions and one satellite image. All input images are resized to 384 × 384 pixels.
+  - ***Feature Extraction***: Each of the three images is independently passed through its own parallel Swin Transformer (Swin-S) backbone to extract high-level feature representations. This late-stage approach allows each modality's features to be fully processed before integration.
+  - ***Decision-Level Fusion***: Rather than combining feature vectors, this model fuses the predictions from each modality. Each of the three feature sets is passed to a separate classification head to produce independent predictions (logits). These logits are then aggregated using a learnable weighted average to produce a final, unified prediction.
+  - ***Hierarchical Classification***: The model decomposes the classification task into a two-stage process to improve accuracy.
+    - Presence Detection: The first stage determines if a bike lane of any type is present.
+    - Type Classification: If a bike lane is detected, the second stage classifies it as either designated or protected.
+
+For details on the training process and the ablation experiments across three key architectural dimensions (i.e., stage of modality concatenation, fusion strategy, and label structure) please refer to the train subfolder
 
 ### References
-If you use this code, please cite:
+If you use this model, please cite the following paper:
