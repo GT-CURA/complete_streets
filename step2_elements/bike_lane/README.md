@@ -78,7 +78,7 @@ The pretrained model provided in this repository is the top-performing architect
 
 The model's architecture is defined by three key dimensions: a late-stage concatenation, decision-level fusion, and a hierarchical label structure.
 
-<p align="center"> <img src="fig/overview_bike_lane.png" width="720" alt="Overview of the multimodal bike lane classification pipeline"> </p>
+<p align="center"> <img src="fig/overview_bike_lane.png" width="640" alt="Overview of the multimodal bike lane classification pipeline"> </p>
 
 **Key Architectural Features:**
   - ***Input Modalities***: The model processes three co-located images for each road segment: two Google Street View images captured from opposite directions and one satellite image. All input images are resized to 384 × 384 pixels.
