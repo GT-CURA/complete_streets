@@ -5,6 +5,25 @@ The code implements the optimal architecture: a late-stage, decision-level fusio
 ## 🏋️‍♀️ Training Configuration
 The model was trained using the following environment and hyperparameters.
 
+| Category                 | Parameter                 | Value / Specification                                  |
+| ------------------------ | ------------------------- | ------------------------------------------------------ |
+| **Training Environment** | Hardware                  | NVIDIA RTX A6000 (48GB VRAM)                           |
+|                          | Software                  | Python 3.10, PyTorch 2.4.1                             |
+| **Model Architecture** | Backbone                  | Swin Transformer (Swin-Large, pretrained on ImageNet)  |
+|                          | Transfer learning         | Backbone frozen except for the final two stages        |
+|                          | Input Image Size          | 384 × 384 pixels (RGB)                                 |
+| **Hyperparameters** | Number of Epochs          | 80 (with early stopping)                               |
+|                          | Batch Size                | 16                                                     |
+|                          | Optimizer                 | AdamW (auto-selected)                                  |
+|                          | Learning Rate (Initial)   | 0.00005                                                |
+|                          | LR Scheduler              | `ReduceLROnPlateau` (factor 0.5, patience 3)           |
+|                          | Weight Decay              | Default (AdamW eps = 1e-6)                             |
+| **Regularization** | Dropout                   | 0.3                                                    |
+|                          | Early Stopping Patience   | 15 Epochs (stops if validataion loss does not improve) |
+|                          | Dataloadeer Workers       | 4                                                      |
+| **Evaluation Protocol** | Metrics                   | Accuracy, Macro Precision, Macro Recall, Macro F1      |
+|                          | Seeds                     | 5 random seeds (2023-2027) to account for stochastic variation; results reported as mean ± std     |
+
 ## Dataset
 The model was trained on a custom-built, geographically diverse dataset. The completed dataset encompasses 1,459 unique street segments across 28 U.S. cities, broken down as follows:
 - 764 locations with no bike lanes
