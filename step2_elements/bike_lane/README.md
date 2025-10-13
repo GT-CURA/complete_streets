@@ -74,11 +74,11 @@ python classify_bikelanes.py
 ```
 
 ## 🔎 Descriptions
-The pretrained model provided in this repository is the top-performing architecture identified in the research, achieving the highest classification accuracy (88.6%) and F1-score (0.855). It employs a multimodal approach that integrates ground-level and aerial perspectives to create a robust and accurate classification framework.
+The pretrained model provided in this repository is the top-performing architecture identified in the research, achieving the highest classification accuracy (90.4%) and F1-score (0.871). It employs a multimodal approach that integrates ground-level and aerial perspectives to create a robust and accurate classification framework.
 
 The model's architecture is defined by three key dimensions: a late-stage concatenation, decision-level fusion, and a hierarchical label structure.
 
-![Alt text for accessibility](fig/overview_bike_lane.png)
+<p align="center"> <img src="fig/overview_bike_lane.png" width="640" alt="Overview of the multimodal bike lane classification pipeline"> </p>
 
 **Key Architectural Features:**
   - ***Input Modalities***: The model processes three co-located images for each road segment: two Google Street View images captured from opposite directions and one satellite image. All input images are resized to 384 × 384 pixels.
@@ -88,7 +88,7 @@ The model's architecture is defined by three key dimensions: a late-stage concat
     - Presence Detection: The first stage determines if a bike lane of any type is present.
     - Type Classification: If a bike lane is detected, the second stage classifies it as either designated or protected.
 
-For details on the training process and the ablation experiments across three key architectural dimensions (i.e., stage of modality concatenation, fusion strategy, and label structure) please refer to the train subfolder
+For details on the training process and ablation studies across three architectural dimensions (concatenation stage, fusion strategy, and label structure) see the paper (link). The code and dataset used for training are available in the `train` subfolder.
 
 ### References
 If you use this model, please cite the following paper:
