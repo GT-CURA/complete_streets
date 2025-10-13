@@ -1,100 +1,40 @@
-This repository contains the code and example datasets for evaluating the Complete Street Score. 
-The workflow identifies and measures eight key Complete Street elements, then integrates them into a composite score using metrics derived from complete street design guidelines.
+This directory contains the Jupyter Notebook `train.ipynb` used to train the best-performing multimodal bike lane classification model described in the paper. The script is designed for reproducibility and can be adapted for training on custom datasets.
 
-Diagram #1
+The code implements the optimal architecture: a late-stage, decision-level fusion model with a hierarchical label structure.
 
-⚠️ Note: Some elements (e.g., street parking, sidewalk) require specialized conda environments with computer vision dependencies. Each element folder includes its own environment.yml. You only need to install and run the environments relevant to your use case.
+## 🏋️‍♀️ Training Configuration
+The model was trained using the following environment and hyperparameters.
 
-We plan to release this as a Python package in the future. For now, the project is organized into modular steps that can be run independently or combined into a full pipeline.
+| Category                 | Parameter                 | Value / Specification                                  |
+| ------------------------ | ------------------------- | ------------------------------------------------------ |
+| **Training Environment** | Hardware                  | NVIDIA RTX A6000 (48GB VRAM)                           |
+|                          | Software                  | Python 3.10, PyTorch 2.4.1                             |
+| **Model Architecture** | Backbone                  | Swin Transformer (Swin-Large, pretrained on ImageNet)  |
+|                          | Transfer learning         | Backbone frozen except for the final two stages        |
+|                          | Input Image Size          | 384 × 384 pixels (RGB)                                 |
+| **Hyperparameters** | Number of Epochs          | 80 (with early stopping)                               |
+|                          | Batch Size                | 16                                                     |
+|                          | Optimizer                 | AdamW (auto-selected)                                  |
+|                          | Learning Rate (Initial)   | 0.00005                                                |
+|                          | LR Scheduler              | `ReduceLROnPlateau` (factor 0.5, patience 3)           |
+|                          | Weight Decay              | Default (AdamW eps = 1e-6)                             |
+| **Regularization** | Dropout                   | 0.3                                                    |
+|                          | Early Stopping Patience   | 15 Epochs (stops if validataion loss does not improve) |
+|                          | Dataloadeer Workers       | 4                                                      |
+| **Evaluation Protocol** | Metrics                   | Accuracy, Macro Precision, Macro Recall, Macro F1      |
+|                          | Seeds                     | 5 random seeds (2023-2027) to account for stochastic variation; results reported as mean ± std     |
 
-# ✨ Features
+## Dataset
+The model was trained on a custom-built, geographically diverse dataset. The completed dataset encompasses 1,459 unique street segments across 28 U.S. cities, broken down as follows:
+- 764 locations with no bike lanes
+- 459 with designated bike lanes
+- 236 with protected bike lanes
 
-- Modular design with three main steps:
-    - Preprocess input points to generate point and line representations of the target road segments
-    - Collection of eight element inventories
-    - Integration into a final Complete Street Score
-- Flexible: skip elements if you already have alternate datasets
-- Sample inputs and outputs for quick testing
+With three images per location (two street-level, one satellite), the dataset contains 4,377 total images.
 
-# 🚀 Quick Guide with Example
-## 1. Create base road segment data (step1_preprocssing)
-Provide one or more points of interest (lat/lon). The script generates the followings with two different projections:
-Points along the road segment
-Corresponding line representations
+For model training, the data was split into training and validation sets using an approximate 7:3 ratio. The training sets for protected and designated bike lanes were upsampled to address class imbalance. The `TRAIN.csv` file defines the samples used for training, while `VAL.csv` defines the validation set.
 
-Example:
+## 🚀 Train on Your Own Data
+If you are interested in training the model on your own dataset, please refer to the `train.ipynb` notebook.
 
-
-## 2. Collect element attributes (step2_elements)
-There are eight element folders under step2_elements/.
-Each contains its own workflow and environment:
-
-Run the scripts for the elements you want to measure.
-
-Skip elements if you already have equivalent data (e.g., if your city provides a bike lane shapefile).
-
-Each element produces a CSV describing its attributes for each road segment.
-Instructions are included in each folder.
-
-## 3. Calculate the completeness score [step3_scoring]
-Once you have collected outputs (from all or some elements), integrate them and calculate the Complete Street Score:
-
-The score reflects segment-level completeness, following metrics derived from established design guidebooks.
-
-# 📂 Repository Structure
-```
-complete-street/
-│
-├── README.md # High-level description, workflow diagram, quickstart
-├── LICENSE
-├── environment.yml
-│
-├── example_inputs/                   # Example input files (toy data, not real study area)
-│   ├── amenities_test.geojson
-│   ├── GTFS_test
-│   └── sample_points.geojson
-│
-├── example_outputs/                  # Example outputs (toy outputs for demonstration)
-│   ├── step1_loader/
-│   │   ├── POINT_EPSG4326.geojson
-│   │   ├── LINE_EPSG4326.geojson
-│   │   ├── POINT_UTMlocal.geojson
-│   │   └── LINE_UTMlocal.geojson
-│   ├── step2_elements/
-│   │   ├── amenities.csv
-│   │   ├── bike_lane.csv
-│   │   ├── median.csv
-│   │   ├── sidewalk.csv
-│   │   ├── street_buffer.csv
-│   │   ├── street_parking.csv
-│   │   ├── transit_stop.csv
-│   │   └── vehicular_road.csv
-│   └── step3_scoring/
-│       └── complete_score.csv
-│
-│
-│
-├── step1_loader/      # Code for generating 4 geojsons from user inputs
-│   ├── generate_points_lines.py
-│   └── README.md
-│
-├── step2_elements/           # Each element has its own folder + env
-│   ├── amenities/
-│   ├── bike_lane/
-│   │   ├── environment_bike_lane.yml
-│   │   ├── bike_lanes.py
-│   │   ├── trained_model.pt
-│   │   └── README.md
-│   ├── median/
-│   ├── sidewalk/
-│   ├── street_buffer/
-│   ├── street_parking/
-│   ├── transit_stop/
-│   └── vehicular_road/
-│
-└── step3_scoring/            # Code to integrate 8 inventories + compute final score
-    ├── integrate_inventories.py
-    └── calculate_score.py
-```
-
-## Quick Guide
+You will need to modify the configuration settings under **Block 2** of the notebook to set the appropriate directories for your image data and your custom `TRAIN.csv` and `VAL.csv` files.
