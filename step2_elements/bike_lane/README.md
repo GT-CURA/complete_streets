@@ -88,7 +88,7 @@ The model's architecture is defined by three key dimensions: a late-stage concat
     - Presence Detection: The first stage determines if a bike lane of any type is present.
     - Type Classification: If a bike lane is detected, the second stage classifies it as either designated or protected.
 
-For details on the training process and the ablation experiments across three key architectural dimensions (i.e., stage of modality concatenation, fusion strategy, and label structure) please refer to the train subfolder
+For details on the training process and the ablation experiments across three key architectural dimensions (i.e., stage of modality concatenation, fusion strategy, and label structure) please refer to the `train` subfolder
 
 ### References
 If you use this model, please cite the following paper:
