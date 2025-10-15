@@ -38,7 +38,7 @@ This repository provides a **multimodal deep learning framework** to detect and 
 
 ## 🚗 Quick Guide
 
-[▶️ Watch the demo (MP4)](fig/demo.mp4)
+[▶️ Watch the demo (MP4)](fig/bike_lane_tutorial.mp4)
 
 1. **Install conda environment**
    ```bash
