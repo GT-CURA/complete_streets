@@ -1,0 +1,9 @@
+1. install using the neurvps_environment.yaml file
+conda env create -f neurvps_environment.yaml
+
+2. activate the environment
+conda activate neurvps
+
+3. install the following manually
+pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 --index-url https://download.pytorch.org/whl/cu121
+

@@ -1,0 +1,34 @@
+ninja_required_version = 1.3
+cxx = c++
+nvcc = /home/jlee4338/anaconda3/envs/neurvps/bin/nvcc
+
+cflags = -DTORCH_EXTENSION_NAME=DCN -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /home/jlee4338/anaconda3/envs/neurvps/lib/python3.8/site-packages/torch/include -isystem /home/jlee4338/anaconda3/envs/neurvps/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -isystem /home/jlee4338/anaconda3/envs/neurvps/lib/python3.8/site-packages/torch/include/TH -isystem /home/jlee4338/anaconda3/envs/neurvps/lib/python3.8/site-packages/torch/include/THC -isystem /home/jlee4338/anaconda3/envs/neurvps/include -isystem /home/jlee4338/anaconda3/envs/neurvps/include/python3.8 -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++17 -O3
+post_cflags = 
+cuda_cflags = -DTORCH_EXTENSION_NAME=DCN -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /home/jlee4338/anaconda3/envs/neurvps/lib/python3.8/site-packages/torch/include -isystem /home/jlee4338/anaconda3/envs/neurvps/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -isystem /home/jlee4338/anaconda3/envs/neurvps/lib/python3.8/site-packages/torch/include/TH -isystem /home/jlee4338/anaconda3/envs/neurvps/lib/python3.8/site-packages/torch/include/THC -isystem /home/jlee4338/anaconda3/envs/neurvps/include -isystem /home/jlee4338/anaconda3/envs/neurvps/include/python3.8 -D_GLIBCXX_USE_CXX11_ABI=0 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -gencode=arch=compute_86,code=compute_86 -gencode=arch=compute_86,code=sm_86 --compiler-options '-fPIC' -std=c++17
+cuda_post_cflags = 
+cuda_dlink_post_cflags = 
+ldflags = -shared -L/home/jlee4338/anaconda3/envs/neurvps/lib/python3.8/site-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/home/jlee4338/anaconda3/envs/neurvps/lib -lcudart
+
+rule compile
+  command = $cxx -MMD -MF $out.d $cflags -c $in -o $out $post_cflags
+  depfile = $out.d
+  deps = gcc
+
+rule cuda_compile
+  depfile = $out.d
+  deps = gcc
+  command = $nvcc  $cuda_cflags -c $in -o $out $cuda_post_cflags
+
+
+
+rule link
+  command = $cxx $in $ldflags -o $out
+
+build deform_conv_cuda.cuda.o: cuda_compile /home/jlee4338/storage/cs_git/step_2_elements/street_parking/vehicle_detection/neurvps/neurvps/models/cpp/deform_conv_cuda.cu
+build deform_conv.o: compile /home/jlee4338/storage/cs_git/step_2_elements/street_parking/vehicle_detection/neurvps/neurvps/models/cpp/deform_conv.cpp
+
+
+
+build DCN.so: link deform_conv_cuda.cuda.o deform_conv.o
+
+default DCN.so

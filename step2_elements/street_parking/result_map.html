@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_98d82e3f270caf4fd915786198d52b0e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    
+                    <style>
+                        .foliumtooltip {
+                            
+                        }
+                       .foliumtooltip table{
+                            margin: auto;
+                        }
+                        .foliumtooltip tr{
+                            text-align: left;
+                        }
+                        .foliumtooltip th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    </style>
+            
+    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>$( function() {
+        $( ".maplegend" ).draggable({
+            start: function (event, ui) {
+                $(this).css({
+                    right: "auto",
+                    top: "auto",
+                    bottom: "auto"
+                });
+            }
+        });
+    });
+    </script>
+    <style type='text/css'>
+      .maplegend {
+        position: absolute;
+        z-index:9999;
+        background-color: rgba(255, 255, 255, .8);
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        padding: 10px;
+        font: 12px/14px Arial, Helvetica, sans-serif;
+        right: 10px;
+        bottom: 20px;
+      }
+      .maplegend .legend-title {
+        text-align: left;
+        margin-bottom: 5px;
+        font-weight: bold;
+        }
+      .maplegend .legend-scale ul {
+        margin: 0;
+        margin-bottom: 0px;
+        padding: 0;
+        float: left;
+        list-style: none;
+        }
+      .maplegend .legend-scale ul li {
+        list-style: none;
+        margin-left: 0;
+        line-height: 16px;
+        margin-bottom: 2px;
+        }
+      .maplegend ul.legend-labels li span {
+        display: block;
+        float: left;
+        height: 14px;
+        width: 14px;
+        margin-right: 5px;
+        margin-left: 0;
+        border: 0px solid #ccc;
+        }
+      .maplegend .legend-source {
+        color: #777;
+        clear: both;
+        }
+      .maplegend a {
+        color: #777;
+        }
+    </style>
+    
+</head>
+<body>
+    
+    
+    <div id='maplegend parking' class='maplegend'>
+        <div class='legend-title'>parking</div>
+        <div class='legend-scale'>
+            <ul class='legend-labels'>
+                <li><span style='background:#ff4c4c'></span>False</li>
+                <li><span style='background:#4cb2ff'></span>True</li>
+            </ul>
+        </div>
+    </div>
+    
+    
+            <div class="folium-map" id="map_98d82e3f270caf4fd915786198d52b0e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_98d82e3f270caf4fd915786198d52b0e = L.map(
+                "map_98d82e3f270caf4fd915786198d52b0e",
+                {
+                    center: [33.75739797940865, -84.38033551951493],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 10,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_98d82e3f270caf4fd915786198d52b0e);
+
+            
+
+        
+    
+            var tile_layer_03ddfcd4f57ddf3957aa8490f42f0a68 = L.tileLayer(
+                "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_03ddfcd4f57ddf3957aa8490f42f0a68.addTo(map_98d82e3f270caf4fd915786198d52b0e);
+        
+    
+            map_98d82e3f270caf4fd915786198d52b0e.fitBounds(
+                [[33.73842142654808, -84.41749497768149], [33.77637453226922, -84.34317606134837]],
+                {}
+            );
+        
+    
+        function geo_json_1efa2042e84c6a769107d0929929266d_styler(feature) {
+            switch(feature.id) {
+                case "0": case "1": case "2": case "3": case "4": case "5": case "6": case "9": 
+                    return {"alpha": 1, "color": "#ff4c4c", "fillColor": "#ff4c4c", "fillOpacity": 0.5, "weight": 5};
+                default:
+                    return {"alpha": 1, "color": "#4cb2ff", "fillColor": "#4cb2ff", "fillOpacity": 0.5, "weight": 5};
+            }
+        }
+        function geo_json_1efa2042e84c6a769107d0929929266d_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillOpacity": 0.75};
+            }
+        }
+        function geo_json_1efa2042e84c6a769107d0929929266d_pointToLayer(feature, latlng) {
+            var opts = {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3};
+            
+            let style = geo_json_1efa2042e84c6a769107d0929929266d_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_1efa2042e84c6a769107d0929929266d_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_1efa2042e84c6a769107d0929929266d.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_1efa2042e84c6a769107d0929929266d_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_1efa2042e84c6a769107d0929929266d = L.geoJson(null, {
+                onEachFeature: geo_json_1efa2042e84c6a769107d0929929266d_onEachFeature,
+            
+                style: geo_json_1efa2042e84c6a769107d0929929266d_styler,
+                pointToLayer: geo_json_1efa2042e84c6a769107d0929929266d_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_1efa2042e84c6a769107d0929929266d_add (data) {
+            geo_json_1efa2042e84c6a769107d0929929266d
+                .addData(data);
+        }
+            geo_json_1efa2042e84c6a769107d0929929266d_add({"bbox": [-84.41749497768149, 33.73842142654808, -84.34317606134837, 33.77637453226922], "features": [{"bbox": [-84.3923411685972, 33.74752065324655, -84.39198635833587, 33.74797225691444], "geometry": {"coordinates": [[-84.3923411685972, 33.74752065324655], [-84.39198635833587, 33.74797225691444]], "type": "LineString"}, "id": "0", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_15_6", "parking": false, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.3923411685972, 33.74752065324655, -84.39198635833587, 33.74797225691444], "geometry": {"coordinates": [[-84.3923411685972, 33.74752065324655], [-84.39198635833587, 33.74797225691444]], "type": "LineString"}, "id": "1", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_15_6", "parking": false, "side": "side2"}, "type": "Feature"}, {"bbox": [-84.41749497768149, 33.7610608004209, -84.41748900872608, 33.76160119941701], "geometry": {"coordinates": [[-84.41748900872608, 33.76160119941701], [-84.41749497768149, 33.7610608004209]], "type": "LineString"}, "id": "2", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_31_17", "parking": false, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.41749497768149, 33.7610608004209, -84.41748900872608, 33.76160119941701], "geometry": {"coordinates": [[-84.41748900872608, 33.76160119941701], [-84.41749497768149, 33.7610608004209]], "type": "LineString"}, "id": "3", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_31_17", "parking": false, "side": "side2"}, "type": "Feature"}, {"bbox": [-84.37062799947648, 33.77585326837052, -84.37045860319128, 33.77637453226922], "geometry": {"coordinates": [[-84.37062799947648, 33.77585326837052], [-84.37045860319128, 33.77637453226922]], "type": "LineString"}, "id": "4", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_40_3", "parking": false, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.37062799947648, 33.77585326837052, -84.37045860319128, 33.77637453226922], "geometry": {"coordinates": [[-84.37062799947648, 33.77585326837052], [-84.37045860319128, 33.77637453226922]], "type": "LineString"}, "id": "5", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_40_3", "parking": false, "side": "side2"}, "type": "Feature"}, {"bbox": [-84.38033372117333, 33.764149936068456, -84.37968675720366, 33.76416691647081], "geometry": {"coordinates": [[-84.38033372117333, 33.76416691647081], [-84.37968675720366, 33.764149936068456]], "type": "LineString"}, "id": "6", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_57_3", "parking": false, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.38033372117333, 33.764149936068456, -84.37968675720366, 33.76416691647081], "geometry": {"coordinates": [[-84.38033372117333, 33.76416691647081], [-84.37968675720366, 33.764149936068456]], "type": "LineString"}, "id": "7", "properties": {"__folium_color": "#4cb2ff", "class_nm": "permit", "confidence": 0.35, "consist_id": "cluster2_secondary_57_3__side2__1", "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_57_3", "parking": true, "side": "side2"}, "type": "Feature"}, {"bbox": [-84.34364819339514, 33.73842142654808, -84.34317606134837, 33.738790415905235], "geometry": {"coordinates": [[-84.34317606134837, 33.73842142654808], [-84.3435975, 33.7387508], [-84.34364819339514, 33.738790415905235]], "type": "LineString"}, "id": "8", "properties": {"__folium_color": "#4cb2ff", "class_nm": null, "confidence": null, "consist_id": "cluster2_tertiary_27_7__side1__3", "cosine_similarity": 0.8762513399124146, "dist_error": 3.8294805631454905, "link_id": "cluster2_tertiary_27_7", "parking": true, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.34364819339514, 33.73842142654808, -84.34317606134837, 33.738790415905235], "geometry": {"coordinates": [[-84.34317606134837, 33.73842142654808], [-84.3435975, 33.7387508], [-84.34364819339514, 33.738790415905235]], "type": "LineString"}, "id": "9", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_tertiary_27_7", "parking": false, "side": "side2"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+    geo_json_1efa2042e84c6a769107d0929929266d.bindTooltip(
+    function(layer){
+    let div = L.DomUtil.create('div');
+    
+    let handleObject = feature=>typeof(feature)=='object' ? JSON.stringify(feature) : feature;
+    let fields = ["link_id", "side", "class_nm", "confidence", "consist_id", "dist_error", "cosine_similarity", "parking"];
+    let aliases = ["link_id", "side", "class_nm", "confidence", "consist_id", "dist_error", "cosine_similarity", "parking"];
+    let table = '<table>' +
+        String(
+        fields.map(
+        (v,i)=>
+        `<tr>
+            <th>${aliases[i]}</th>
+            
+            <td>${handleObject(layer.feature.properties[v])}</td>
+        </tr>`).join(''))
+    +'</table>';
+    div.innerHTML=table;
+    
+    return div
+    }
+    ,{
+  "sticky": true,
+  "className": "foliumtooltip",
+});
+                     
+    
+            geo_json_1efa2042e84c6a769107d0929929266d.addTo(map_98d82e3f270caf4fd915786198d52b0e);
+        
+</script>
+</html>
