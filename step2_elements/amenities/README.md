@@ -52,17 +52,17 @@ Focus on amenities supporting daily needs, following the 15-minute city framewor
 | 9 | **Schools** | 6111## | Elementary and secondary schools |
 | 10 | **Services** | 812###; 522###; 491110 | Beauty salons; Laundry; Pet care; Postal services |
 
-Obtain POI data with location, NAICS code, and operating hours from platforms such as SafeGraph, Google Places, or Advan. *Not all platforms support these attributes but at least Advan does.*
+Obtain POI data with location, NAICS code, and operating hours from platforms such as SafeGraph, Google Places, or ADVAN. *While not all platforms support these attributes, ADVAN and SafeGraph does*
 
 ### 3. Compute Accessibility Scores
 Once you’ve identified all accessible POIs, compute a weighted composite score following the method below.
 
 
 ## 🔎 Methodology - Calculating a weighted composite score
-Not all amenities contribute equally to daily life. Each POI’s importance (m_j) is defined by three components:
+Not all amenities contribute equally to daily life. Each POI’s importance (**m<sub>j</sub>**) is defined by three components:
   1. Popularity (**pop**): *How much an amenitiy attracts vistis*
   2. Intensity (**int**): *How long people dwell*
-  3. Operating hour (**opr**):
+  3. Operating hour (**opr**): *How long the amenity remains open to the public*
 
 You can refer to `amenities_weigths.csv`, which contains the standardized popularity and intensity score for each amenity category. *Note* The POI data were obtained from ADVAN, collected in October 2024.
 
