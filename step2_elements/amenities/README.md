@@ -1,15 +1,15 @@
-# Evaluation of Accessbility to Amenities
+# Evaluation of Accessibility to Amenities
 
 
 ## 📍 Objective
-This repository provides a framework to evaluate accessibility to daily amenities (i.e., points of interests) for given road segments. It demonstrates how to derive a composite accessibility index that accounts for amenity density, amenity importance, and road length through four main steps.
+This repository provides a framework to evaluate accessibility to daily amenities (i.e., points of interest) for given road segments. It demonstrates how to derive a composite accessibility index that accounts for amenity density, amenity importance, and road length through four main steps.
 
 - **Input:**
   1. A GeoJSON file of road segment points.
   2. CSV table defining amenity-type weights (based on NACIS codes and behavioral factors).
 - **Process:**  
   1. Generate walksheds (reachable areas) around each road segment point.
-  2. Collect daily points of interests (POIs) within each walksehd.
+  2. Collect daily points of interest (POIs) within each walkshed.
   3. Assign weighted values to POIs using standardized popularity, intensity, and operating hour metrics.
   4. Aggregate the weighted POIs into a composite accessibility score that relfects both POI density and road length
 - **Output:**  
@@ -32,7 +32,7 @@ To replicate the analysis:
 
 ### 1. Generate a Walkshed
 - Center point: Use the midpoint of each road segment.
-- Distance type: *Eucledian distance* or *Network-based distance*. Tools such as HERE API can automate generating network-based walkshed moreeasily.
+- Distance type: *Eucledian distance* or *Network-based distance*. Tools such as HERE API can automate generating a network-based walkshed more easily.
 - Distance threshold: Defined based on your purpose - either a distance (e.g., 800 meters) or travel time (e.g., 10 minute walk)
 
 ### 2. Collect POI Data
@@ -54,7 +54,7 @@ Focus on amenities supporting daily needs, following the 15-minute city framewor
 
 Obtain POI data with location, NAICS code, and operating hours from platforms such as SafeGraph, Google Places, or Advan. *Not all platforms support these attributes but at least Advan does.*
 
-### 3. Compute Accessibility Scoresd
+### 3. Compute Accessibility Scores
 Once you’ve identified all accessible POIs, compute a weighted composite score following the method below.
 
 
@@ -64,7 +64,7 @@ Not all amenities contribute equally to daily life. Each POI’s importance (m_j
   2. Intensity (**int**): *How long people dwell*
   3. Operating hour (**opr**):
 
-You can refer to `amenities_weigths.csv` which contains the standardzied popularity and intensity score for each amenity category. *Note* The POI data were obtained from ADVAN, collected in October 2024.
+You can refer to `amenities_weigths.csv`, which contains the standardized popularity and intensity score for each amenity category. *Note* The POI data were obtained from ADVAN, collected in October 2024.
 
 ### 1️⃣ Popularity
 To calculate the standardized popularity score for each amenity type, we first computed the average monthly visit count for all POIs within each category across the United States. In the figure below, the blue bars represent the total number of POIs per category, while the red points indicate the mean number of visits. For example, restaurant-related POIs receive an average of approximately 362 monthly visitors.
@@ -76,11 +76,11 @@ We then applied Min–Max normalization to these mean visit counts to derive a s
 <p align="left"> <img src="fig/popularity_standardized.png" width="640" alt="Distribution standardized popularity scores across amenity types"> </p>
 
 ### 2️⃣ Intensity
-We first calculated the average dewll time which is mean of median dwell times for POIs across the US.
+We first calculated the average dwell time, which is the mean of median dwell times for POIs across the US.
 
 <p align="left"> <img src="fig/intensity_avg.png" width="640" alt="Distribution of average median dwell times across amenity types"> </p>
 
-Next using the similar logic like popularity, the standardized intensity score was retrieved.
+Next, using a similar logic like popularity, the standardized intensity score was retrieved.
 
 <p align="left"> <img src="fig/intensity_standardized.png" width="640" alt="Distribution standardized intensity scores across amenity types"> </p>
 
