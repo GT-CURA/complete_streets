@@ -11,7 +11,7 @@ This repository provides a framework to evaluate accessibility to daily amenitie
   1. Generate walksheds (reachable areas) around each road segment point.
   2. Collect daily points of interest (POIs) within each walkshed.
   3. Assign weighted values to POIs using standardized popularity, intensity, and operating hour metrics.
-  4. Aggregate the weighted POIs into a composite accessibility score that relfects both POI density and road length
+  4. Aggregate the weighted POIs into a composite accessibility score that reflects both POI density and road length
 - **Output:**  
   - The composite accessibility score for each road segment.
 
@@ -32,8 +32,8 @@ To replicate the analysis:
 
 ### 1. Generate a Walkshed
 - Center point: Use the midpoint of each road segment.
-- Distance type: *Eucledian distance* or *Network-based distance*. Tools such as HERE API can automate generating a network-based walkshed more easily.
-- Distance threshold: Defined based on your purpose - either a distance (e.g., 800 meters) or travel time (e.g., 10 minute walk)
+- Distance type: *Eucledian distance* or *Network-based distance*. Tools such as <a href="[https://www.advanresearch.com/](https://www.here.com/docs/bundle/isoline-routing-api-developer-guide-v8/page/README.html)" target="_blank">HERE API</a> can automate generating a network-based walkshed more easily.
+- Distance threshold: Defined based on your purpose - either a distance (e.g., 800 meters) or travel time (e.g., 10-minute walk)
 
 ### 2. Collect POI Data
 Focus on amenities supporting daily needs, following the 15-minute city framework. This analysis includes 10 major amenity categories.
