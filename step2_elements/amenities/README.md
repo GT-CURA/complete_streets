@@ -64,54 +64,58 @@ Not all amenities contribute equally to daily life. Each POI’s importance (m_j
   2. Intensity (**int**): *How long people dwell*
   3. Operating hour (**opr**):
 
-You can refer to `amenities_weigths.csv` which contains the standardzied popularity and intensity score for each amenity category.
+You can refer to `amenities_weigths.csv` which contains the standardzied popularity and intensity score for each amenity category. *Note* The POI data were obtained from ADVAN, collected in October 2024.
 
-### Popularity
-To calculate the standardized popularity score for each amenity type, we first computed the average monthly visit count for all POIs within each category across the United States. In Figure 1, the blue bars represent the total number of POIs per category, while the red points indicate the mean number of visits. For example, restaurant-related POIs receive an average of approximately 362 monthly visitors.
+### 1️⃣ Popularity
+To calculate the standardized popularity score for each amenity type, we first computed the average monthly visit count for all POIs within each category across the United States. In the figure below, the blue bars represent the total number of POIs per category, while the red points indicate the mean number of visits. For example, restaurant-related POIs receive an average of approximately 362 monthly visitors.
 
-<p align="center"> <img src="fig/popularity_avg_visit.png" width="540" alt="Distribution average visit counts across amenity types"> </p>
+<p align="left"> <img src="fig/popularity_avg_visit.png" width="640" alt="Distribution of average visit counts across amenity types"> </p>
 
-We then applied Min–Max normalization to these mean visit counts to derive a standardized popularity score for each category (see Figure 2).
+We then applied Min–Max normalization to these mean visit counts to derive a standardized popularity score for each category.
 
-<p align="center"> <img src="fig/popularity_standardized.png" width="640" alt="Distribution standardized popularity scores across amenity types"> </p>
+<p align="left"> <img src="fig/popularity_standardized.png" width="640" alt="Distribution standardized popularity scores across amenity types"> </p>
 
-### Intensity
-We first calculated the average dewll time which is mean of median dwell times for POIs across the US (Figure 3). Next using the similar logic like popularity, the standardized intensity score was retrieved (Figure 4)
+### 2️⃣ Intensity
+We first calculated the average dewll time which is mean of median dwell times for POIs across the US.
 
-### Operating Hours
-Lastly, we also account for operation hours per week for each unique POI. Because POI operating relatively longer ~~~, we defined a median operational time among POIs in the US. Out of the 9,823,558 POIs, 68% are found to record operational hours information, and the median operation time is 53 hours per week (Figure #). So we assign additional weight to amenity that operates more than 53 hours.
-opr = 1.5 if operational time > 53; 1 otherwise
+<p align="left"> <img src="fig/intensity_avg.png" width="640" alt="Distribution of average median dwell times across amenity types"> </p>
 
+Next using the similar logic like popularity, the standardized intensity score was retrieved.
 
-*Note* The data source of information of POIs is ADVAN collected in 2024 October
+<p align="left"> <img src="fig/intensity_standardized.png" width="640" alt="Distribution standardized intensity scores across amenity types"> </p>
 
-### Composite POI Weight
+### 3️⃣ Operating Hours
+Lastly, we accounted for each POI’s weekly operating hours. Among 9.8 million POIs in the U.S., 68% reported operational-hour data, with a median of 53 hours per week. 
+
+<p align="left"> <img src="fig/operating_hours_all.png" width="640" alt="Distribution of operating hours across all POIs"> </p>
+
+Amenities operating longer than this median were assigned higher weights: **opr = 1.5** if weekly hours > 53; otherwise **1.0**
+
+### 🏛️ Composite POI Weight
 Each POI's individual weight is calculated as:
 
-m_j = opr_j × (1 + pop_j) × (1 + int_j)
+**m<sub>j</sub> = opr<sub>j</sub> × (1 + pop<sub>j</sub>) × (1 + int<sub>j</sub>)**
 
-opr = 1.5 if weekly operation hours exceed 53 hrs; otherwise, 1
-pop = Min-Max standardized popularity score
-int = Min-Max standardized intensity score
+- **opr** = 1.5 if weekly operation hours exceed 53 hrs; otherwise **1**  
+- **pop** = Min–Max standardized popularity score  
+- **int** = Min–Max standardized intensity score  
+
+The multiplicative form assumes compounding effects of **popularity**, **intensity**, and **operating hours**.
+
 The multiplicative form assumes compounding effects of popularity, intensity, and availability.
 
-### Composite Accessibility Score
+### 🧲 Composite Accessibility Score
 For each road segment i:
 
-AmenityAccessibility_i = (∑_𝑗▒𝑚_𝑗 )/𝑁_𝑖 ×(1+ln⁡〖(𝑁+1)〗)÷ln⁡〖𝑙_𝑖 〗
+**AmenityAccessibility<sub>i</sub>** = ( ∑<sub>j</sub> *m<sub>j</sub>* ) / *N<sub>i</sub>* × (1 + ln(*N* + 1)) ÷ ln(*l<sub>i</sub>*)
 
-i = road segment identifier
-j = POI within the buffer of road segment I
-l = length of road segment i
-N = Number of POIs of road segment i
-m = weight assigned to each POIj
+- **i** = road segment identifier  
+- **j** = POI within the buffer of road segment *i*  
+- **l<sub>i</sub>** = length of road segment *i*  
+- **N<sub>i</sub>** = number of POIs around segment *i*  
+- **m<sub>j</sub>** = weight assigned to POI *j*
 
 This formulation balances amenity density with segment length, producing a dimensionless index representing accessibility richness per unit road length.
-
-
-
-
-
 
 ### References
 If you use this model, please cite the following paper:
