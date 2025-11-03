@@ -69,9 +69,11 @@ You can refer to `amenities_weigths.csv` which contains the standardzied popular
 ### Popularity
 To calculate the standardized popularity score for each amenity type, we first computed the average monthly visit count for all POIs within each category across the United States. In Figure 1, the blue bars represent the total number of POIs per category, while the red points indicate the mean number of visits. For example, restaurant-related POIs receive an average of approximately 362 monthly visitors.
 
+<p align="center"> <img src="fig/popularity_avg_visit.png" width="540" alt="Distribution average visit counts across amenity types"> </p>
+
 We then applied Min–Max normalization to these mean visit counts to derive a standardized popularity score for each category (see Figure 2).
 
-
+<p align="center"> <img src="fig/popularity_standardized.png" width="640" alt="Distribution standardized popularity scores across amenity types"> </p>
 
 ### Intensity
 We first calculated the average dewll time which is mean of median dwell times for POIs across the US (Figure 3). Next using the similar logic like popularity, the standardized intensity score was retrieved (Figure 4)
