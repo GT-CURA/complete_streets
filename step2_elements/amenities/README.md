@@ -17,9 +17,6 @@ This repository provides a framework to evaluate accessibility to daily amenitie
 
 
 ## 📦 Features:
-- **`POINT_EPSG4326.geojson`**
-  Example input file (5 sample points in Atlanta). Replace with your own points of interest.
-
 - **`amenities_weigths.csv`**  
   Contains standardized popularity and intensity scores for each amenity type (based on NAICS codes). These values are used to assign behavioral weights to each POI.
 
