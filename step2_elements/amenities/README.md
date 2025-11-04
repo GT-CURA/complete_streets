@@ -28,7 +28,7 @@ This repository provides a framework to evaluate accessibility to daily amenitie
 
 This repository outlines the analytical logic rather than providing a ready-to-run Python script, since multiple tools can be used for each spatial step.
 
-To replicate the analysis:
+To conduct the analysis:
 
 ### 1. Generate a Walkshed
 - Center point: Use the midpoint of each road segment.
@@ -36,7 +36,7 @@ To replicate the analysis:
 - Distance threshold: Defined based on your purpose - either a distance (e.g., 800 meters) or travel time (e.g., 10-minute walk)
 
 ### 2. Collect POI Data
-Focus on amenities supporting daily needs, following the 15-minute city framework. This analysis includes 10 major amenity categories.
+Collect amenities supporting daily needs, following the 15-minute city framework. This analysis includes 10 major amenity types. Next, identify the POIs located within the walkshed.
 
 **Amenity Categories Considered (N = 10)**
 | Type | Category | NAICS Code(s) | Example Descriptions |
@@ -52,26 +52,25 @@ Focus on amenities supporting daily needs, following the 15-minute city framewor
 | 9 | **Schools** | 6111## | Elementary and secondary schools |
 | 10 | **Services** | 812###; 522###; 491110 | Beauty salons; Laundry; Pet care; Postal services |
 
-Obtain POI data with location, NAICS code, and operating hours from platforms such as SafeGraph, Google Places, or ADVAN. *While not all platforms support these attributes, ADVAN and SafeGraph does*
+Obtain POI data with location, NAICS code, and operating hours from platforms such as SafeGraph, Google Places, Yelp, or ADVAN. *While not all platforms support these attributes, ADVAN and SafeGraph do*
 
 ### 3. Compute Accessibility Scores
 Once you’ve identified all accessible POIs, compute a weighted composite score following the method below.
 
-
 ## 🔎 Methodology - Calculating a weighted composite score
-Not all amenities contribute equally to daily life. Each POI’s importance (**m<sub>j</sub>**) is defined by three components:
+Not all amenities contribute equally to daily life. Each POI's importance (**m<sub>j</sub>**) is defined by three components:
   1. Popularity (**pop**): *How much an amenitiy attracts vistis*
   2. Intensity (**int**): *How long people dwell*
   3. Operating hour (**opr**): *How long the amenity remains open to the public*
 
-You can refer to `amenities_weigths.csv`, which contains the standardized popularity and intensity score for each amenity category. *Note* The POI data were obtained from ADVAN, collected in October 2024.
+You can refer to `amenities_weigths.csv`, which contains the standardized popularity and intensity score for each amenity type. *Note* The POI data were obtained from ADVAN (time period: October 2024).
 
 ### 1️⃣ Popularity
 To calculate the standardized popularity score for each amenity type, we first computed the average monthly visit count for all POIs within each category across the United States. In the figure below, the blue bars represent the total number of POIs per category, while the red points indicate the mean number of visits. For example, restaurant-related POIs receive an average of approximately 362 monthly visitors.
 
 <p align="left"> <img src="fig/popularity_avg_visit.png" width="640" alt="Distribution of average visit counts across amenity types"> </p>
 
-We then applied Min–Max normalization to these mean visit counts to derive a standardized popularity score for each category.
+We then applied Min–Max normalization to these mean visit counts to derive a standardized popularity score for each type.
 
 <p align="left"> <img src="fig/popularity_standardized.png" width="640" alt="Distribution standardized popularity scores across amenity types"> </p>
 
@@ -85,7 +84,7 @@ Next, using a similar logic like popularity, the standardized intensity score wa
 <p align="left"> <img src="fig/intensity_standardized.png" width="640" alt="Distribution standardized intensity scores across amenity types"> </p>
 
 ### 3️⃣ Operating Hours
-Lastly, we accounted for each POI’s weekly operating hours. Among 9.8 million POIs in the U.S., 68% reported operational-hour data, with a median of 53 hours per week. 
+Lastly, we accounted for each POI's weekly operating hours. Among 9.8 million POIs in the U.S., 68% reported operating hour data, with a median of 53 hours per week. 
 
 <p align="left"> <img src="fig/operating_hours_all.png" width="640" alt="Distribution of operating hours across all POIs"> </p>
 
@@ -101,8 +100,6 @@ Each POI's individual weight is calculated as:
 - **int** = Min–Max standardized intensity score  
 
 The multiplicative form assumes compounding effects of **popularity**, **intensity**, and **operating hours**.
-
-The multiplicative form assumes compounding effects of popularity, intensity, and availability.
 
 ### 🧲 Composite Accessibility Score
 For each road segment i:
