@@ -111,8 +111,14 @@ From the `utils_automation` directory, execute the main script from your termina
 
 *Note* If you see an error: `AssertionError: MMCV==2.2.0 is used but incompatible Please install mmcv>=2.0.0rc4` modify the file **mmsegmenation/mmseg/__init__.py** by changing: `MMCV_MAX = '2.2.0'` → `MMCV_MAX = '2.2.1'`
 
+<br>
+<br>
+
 ## 🔎 Descriptions
 For details about the methodology, please find the [paper](https://doi.org/10.1177/23998083251369602).
+
+<br>
+<br>
 
 ### References
 If you use this methodology or code, please cite: 
