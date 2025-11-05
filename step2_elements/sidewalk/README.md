@@ -1,7 +1,9 @@
 # Automated Sidewalk Width Estimation
 
 ## 📍 Objective
-This repository provides a computer vision pipeline to detect sidewalks in Google Street View images and estimate their **width** in meters. It uses a semantic segmentation model to identify sidewalk pixels and a geometric model to calculate width based on images taken from different camera pitch angles.
+This repository provides tools to estimate sidewalk width (in meters) using two Google Street View images captured at different camera pitch angles. It includes both an automated model and a manual annotation interface.
+- Automated Tool: Detects sidewalk and estimates width using a semantic segmentation model (SegFormer) and Canny edge detection to identify top and bottom sidewalk edges. A geometric model then calculates the physical width based on images taken at two pitch angles (0° and -10°).
+- Manual Annotation Tool: Provides an interface for users to manually mark sidewalk edges when the automated method fails to detect them accurately. This tool also estimates sidewalk width using the same geometric logic. More details and code are available in the `/manual_collection` directory.
 
 - **Input:** A GeoJSON file of road segment points.  
 - **Process:**  
@@ -19,17 +21,13 @@ This repository provides a computer vision pipeline to detect sidewalks in Googl
   Example input file (5 sample points in Atlanta). Replace with your own points of interest.
 
 - **`sidewalk_env.yml`**  
-  Conda environment specification with pinned package versions for reproducible setup.  
+  Conda environment file specifying dependencies and pinned versions for reproducible setup.
+  
+- **Python scripts** in `utils_automation`  
+  Contains modularized Python scripts supporting the automated pipeline. The main workflow can be executed via main.py
 
-- **`mmsegmentation/`**  
-  This required directory contains the model configurations and will store the downloaded model checkpoint for semantic segmentation. For more details on the underlying library, see the MMSegmentation GitHub repository.
-
-- **`/outputs/`**  
-  An automatically created folder for storing all downloaded imagery, segmentation results, and final CSV predictions.
-
-- **Python scripts** in `utils`  
-  The project is modularized into several scripts. `main.py` is the main entry point that orchestrates the entire download, segmentation, and analysis pipeline.
-
+- **`/manual_collection`**
+  Includes guidance and scripts for manual labeling of sidewalk edges.
 
 ## 🚗 Quick Guide
 1. **Install conda environment**
