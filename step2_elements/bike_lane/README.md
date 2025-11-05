@@ -47,19 +47,19 @@ A GeoJSON file of road segment points.
 
 [▶️ Watch the demo (MP4)](fig/bike_lane_tutorial.mp4)
 
-1. **Install conda environment**
+### 1. Install Conda Environment
    ```bash
    conda env create -f bike_lane_env.yml
    conda activate bike_lane_env
    ```
 
-2. **Prepare input data**
+### 2. Prepare Input Data
   - Place your road segment GeoJSON file (generated via step1_loader) in the working directory, or use the provided toy dataset for testing.
   - Open classify_bikelanes.py and edit:
     - [Line 4] Set the working directory where .py, .yml, .pt, and the GeoJSON file are stored.
     - [Line 8] Enter your Google API Key (enabled for Street View Static API and Map Tiles API) to allow imagery downloads.
 
-3. **Download pretrained weights**
+### 3. Download Pretrained Weights
 The script expects `bike_lane_classification_min_fp16.pt` in your working directory.
 - Browser:
   Download from the Release asset:
@@ -78,7 +78,7 @@ The script expects `bike_lane_classification_min_fp16.pt` in your working direct
   # "https://github.com/GT-CURA/complete_streets/releases/download/v0.1.0/bike_lane_classification_min_fp16.pt"
    ```
    
-5. **Run the Python script**
+### 5. Run the Python Script
 ```bash
 python classify_bikelanes.py
 ```
@@ -93,7 +93,7 @@ The model's architecture is defined by three key dimensions: a late-stage concat
 
 <p align="center"> <img src="fig/overview_bike_lane.png" width="640" alt="Overview of the multimodal bike lane classification pipeline"> </p>
 
-**Key Architectural Features:**
+###  Key Architectural Features:
   - ***Input Modalities***: The model processes three co-located images for each road segment: two Google Street View images captured from opposite directions and one satellite image. All input images are resized to 384 × 384 pixels.
   - ***Feature Extraction***: Each of the three images is independently passed through its own parallel Swin Transformer (Swin-S) backbone to extract high-level feature representations. This late-stage approach allows each modality's features to be fully processed before integration.
   - ***Decision-Level Fusion***: Rather than combining feature vectors, this model fuses the predictions from each modality. Each of the three feature sets is passed to a separate classification head to produce independent predictions (logits). These logits are then aggregated using a learnable weighted average to produce a final, unified prediction.
@@ -101,7 +101,7 @@ The model's architecture is defined by three key dimensions: a late-stage concat
     - Presence Detection: The first stage determines if a bike lane of any type is present.
     - Type Classification: If a bike lane is detected, the second stage classifies it as either designated or protected.
 
-For details on the training process and ablation studies across three architectural dimensions (concatenation stage, fusion strategy, and label structure) see the paper (link). The code and dataset used for training are available in the `train` subfolder.
+For details on the training process and ablation studies across three architectural dimensions (concatenation stage, fusion strategy, and label structure) see the paper([link](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5599538)). The code and dataset used for training are available in the `train` subfolder.
 
 <br>
 <br>
