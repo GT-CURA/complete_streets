@@ -3,15 +3,20 @@
 ## 📍 Objective
 This repository provides a **multimodal deep learning framework** to detect and classify bike lane infrastructure using **street view and satellite imagery**.
 
-- **Input:** A GeoJSON file of road segment points.  
-- **Process:**  
+### Input:
+A GeoJSON file of road segment points.  
+
+### Process:
   1. Download Google Street View images (two opposing headings) and a satellite tile for each location.  
   2. Run a pretrained deep learning model.
-- **Output:**  
+
+### Output:
   - A CSV file of predictions including **segment_id**, **classification label** ('No Bike Lane', 'Designated', 'Protected'), and **confidence probabilities**.  
   - Downloaded images stored locally in `/images`.
   - Model outputs stored in `/outputs`.  
 
+<br>
+<br>
 
 ## 📦 Features:
 - **`POINT_EPSG4326.geojson`**
@@ -35,6 +40,8 @@ This repository provides a **multimodal deep learning framework** to detect and 
   - *Block 2*: Load trained PyTorch model from checkpoint  
   - *Block 3*: Run classification and save outputs  
 
+<br>
+<br>
 
 ## 🚗 Quick Guide
 
@@ -76,6 +83,9 @@ The script expects `bike_lane_classification_min_fp16.pt` in your working direct
 python classify_bikelanes.py
 ```
 
+<br>
+<br>
+
 ## 🔎 Descriptions
 The pretrained model provided in this repository is the top-performing architecture identified in the research, achieving the highest classification accuracy (90.4%) and F1-score (0.871). It employs a multimodal approach that integrates ground-level and aerial perspectives to create a robust and accurate classification framework.
 
@@ -92,6 +102,9 @@ The model's architecture is defined by three key dimensions: a late-stage concat
     - Type Classification: If a bike lane is detected, the second stage classifies it as either designated or protected.
 
 For details on the training process and ablation studies across three architectural dimensions (concatenation stage, fusion strategy, and label structure) see the paper (link). The code and dataset used for training are available in the `train` subfolder.
+
+<br>
+<br>
 
 ### References
 If you use this model, please cite the following paper:
