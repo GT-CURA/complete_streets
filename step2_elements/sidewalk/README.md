@@ -1,83 +1,115 @@
 # Automated Sidewalk Width Estimation
 
 ## 📍 Objective
-This repository provides tools to estimate sidewalk width (in meters) using two Google Street View images captured at different camera pitch angles. It includes both an automated model and a manual annotation interface.
-- Automated Tool: Detects sidewalk and estimates width using a semantic segmentation model (SegFormer) and Canny edge detection to identify top and bottom sidewalk edges. A geometric model then calculates the physical width based on images taken at two pitch angles (0° and -10°).
-- Manual Annotation Tool: Provides an interface for users to manually mark sidewalk edges when the automated method fails to detect them accurately. This tool also estimates sidewalk width using the same geometric logic. More details and code are available in the `/manual_collection` directory.
+This repository provides tools to estimate sidewalk width (in meters) using two Google Street View images captured at different camera pitch angles. It includes both an automated model and a manual annotation tool.
+- Automated Model: Uses a semantic segmentation model (SegFormer) to detect sidewalk pixels, then applies Canny edge detection to locate the top and bottom sidewalk edges. A simple geometric model converts pixel distances (from two pitch angles) into physical width.
+- Manual Annotation Tool: A Jupyter-based interface for manually marking sidewalk edges when the automated pipeline fails or is uncertain. It uses the same geometric model to estimate width. Code and instructions are available in the `/manual_collection` directory.
 
 - **Input:** A GeoJSON file of road segment points.  
 - **Process:**  
-  1. Downloads Google Street View images for each point at two camera pitches (0° and -10°).
-  2. Runs a SegFormer semantic segmentation model to identify sidewalks in each image.
-  3. Applies image processing to extract the top and bottom edges of the detected sidewalks.
-  4. Uses the pixel coordinates of the edges from both pitches to solve a system of geometric equations.
+  1. Download Google Street View images for each point at two pitches (0° and -10°).
+  2. Run a SegFormer semantic segmentation model to identify sidewalks in each image.
+  3. Extract top and bottom sidewalk edges from segmentation masks.
+  4. Use pixel coordinates of the edges from both pitches to solve a of geometric system and estimate sidewalk width.
 - **Output:**  
-  - A CSV file for each input point containing the estimated `width` and an `error_code`. 
+  - A CSV file for each input point containing the estimated `width`. 
   - All downloaded images, segmentation masks, and intermediate line-detection visualizations are saved locally in the `/outputs` directory.
 
 
 ## 📦 Features:
 - **`POINT_EPSG4326.geojson`**
-  Example input file (5 sample points in Atlanta). Replace with your own points of interest.
-
-- **`sidewalk_env.yml`**  
-  Conda environment file specifying dependencies and pinned versions for reproducible setup.
+  Example input file (5 sample points in Atlanta). You can replace this with your own GeoJSON of points along road segments derived from `step1_loader`.
   
-- **Python scripts** in `utils_automation`  
-  Contains modularized Python scripts supporting the automated pipeline. The main workflow can be executed via main.py
+- **`/utils_automation`**
+  Includes python modules that implement the automated pipeline. The main workflow can be executed via main.py.
+
+- **`/output_automation`**
+  Example outputs (e.g., images and estimated widths) for a sample input file with five points in Atlanta.
 
 - **`/manual_collection`**
-  Includes guidance and scripts for manual labeling of sidewalk edges.
+  Scripts and instructions for manual edge annotation of sidewalks.
 
 ## 🚗 Quick Guide
-1. **Install conda environment**
-   ```bash
-   conda env create -f sidewalk_env.yml
-   conda activate sidewalk_env
-   ```
-    
-2. **Set Up the Segmentation Model**
-The pipeline uses a configuration and checkpoint from the OpenMMLab MMSegmentation repository. You must clone the repository and download the weights.
+1. **Load Semantic Segmentation Model**
+The segmentation model used in this analysis is [SegFormer] (https://github.com/NVlabs/SegFormer), with both its configuration and pretrained checkpoint obtained from the OpenMMLab MMSegmentation repository. Before downloading the SegFormer weights, you must first install and verify MMSegmentation following the official [installation guide] (https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/get_started.md). Once MMSegmentation is properly set up, download the SegFormer model checkpoint from the same repository.
 
-  1. Clone the `mmsegmentation` repository
-   ```bash
-   git clone https://github.com/open-mmlab/mmsegmentation.git
-   ```
+SegFormer is used in this project to extract sidewalk pixels from street view imagery. You are also welcome to experiment with other semantic segmentation models trained on the Cityscapes dataset if you wish to extend performance.
 
-   2. Create a `checkpoints` directory inside it and download the model:
-  ```bash
-   # Navigate into the new folder
-   cd mmsegmentation
-   
+Below is an example setup on a machine that supports PyTorch with CUDA 11.8. If your hardware is different, adjust the PyTorch installation step using the official PyTorch instructions.
+
+  1. Create and activate Conda environment
+    ```bash
+    conda create --name sidewalk_width python=3.8 -y
+    conda activate sidewalk_width
+    ```
+  
+  2. Install PyTorch (GPU example with CUDA 11.8)
+    For CUDA 11.8 on Linux:
+    ```bash
+    conda install pytorch torchvision pytorch-cuda=11.8 -c pytorch -c nvidia
+    ```
+
+    Quick check:
+    ```bash
+    python -c "import torch; print(torch.cuda.is_available(), torch.version.cuda)"
+    ```
+
+  3. Install MMCV
+    ```bash
+    pip install fsspec
+    pip install -U openmim
+    mim install mmengine
+    mim install "mmcv==2.2.0"
+    ```
+  
+  3. Install MMSegmentation
+    ```bash
+    git clone -b main https://github.com/open-mmlab/mmsegmentation.git
+    cd mmsegmentation
+    pip install -v -e .
+    ```
+
+  3. Download SegFormer checkpoint
+  Inside the `mmsegmentation` folder:
+  ```bash   
    # Create the directory
    mkdir checkpoints
   
-   # Download the weights into that directory
+   # Download the weights of SegFormer into that directory
    wget -P checkpoints/ https://download.openmmlab.com/mmsegmentation/v0.5/segformer/segformer_mit-b5_8x1_1024x1024_160k_cityscapes/segformer_mit-b5_8x1_1024x1024_160k_cityscapes_20211206_072934-87a052ec.pth
    ```
 
-3. **Prepare input data**
+2. **Install Utility Ddependencies**
+After successflly loading the semantic segmentation model plase install the following dependencies:
+  ```bash
+  conda install -c conda-forge pillow requests -y
+  conda install -c conda-forge geopandas ftfy regex scikit-image
+   ```
+
+3. **Prepare Input Data**
   - Place your road segment GeoJSON file (generated via step1_loader) in the working directory, or use the provided toy dataset for testing.
   - Open `config.py` and edit the following variables:
     - [Line 6] Enter your Google API Key to allow imagery downloads.
-    - [Line 10, 11] Verify that these paths correctly point to the files inside the `mmsegmentation` directory you just cloned.
-    - [Line 18] Set the path where you want to save all outputs.
+    - [Line 9] Specify the directory path of yout input data file (.geojson).
+    - [Line 13, 14] Provide the correct paths to the segmentation configuration and checkpoint files within the `mmsegmentation` directory you cloned earlier.
+    - [Line 21] Define the output directory where all generated files and images will be saved.
 
-   
-4. **Run the Python script**
-Execute the main script from your terminal. The program will process each link_id from your GeoJSON sequentially.
+4. **Run the Automated Pipeline**
+From the `utils_automation` directory, execute the main script from your terminal. The program will process each link_id from your GeoJSON sequentially.
 ```bash
 python main.py
 ```
+
+*Note* If you see an error like `AssertionError: MMCV==2.2.0 is used but incompatible. Please install mmcv>=2.0.0rc4.` you can relax the internal upper bound in `mmsegmenation/mmseg/__init__.py` by `chaing MMCV_MAX = '2.2.0'` → `MMCV_MAX = '2.2.1'`
 
 ## 🔎 Descriptions
 For details regarding the methodology please find the [paper](https://doi.org/10.1177/23998083251369602).
 
 ### References
-If you use this model, please cite the following paper: 
+If you use this methodology or code, please cite: 
 
 ```bibtex
-@article{your_article,
+@article{lieu_guhathakurta_2025_sidewalk_width,
   title   = {A novel approach for estimating sidewalk width from street view images and computer vision},
   author  = {Lieu, S. J., & Guhathakurta, S.},
   journal = {Environment and Planning B: Urban Analytics and City Science},

@@ -4,7 +4,7 @@ import torch
 import pandas as pd
 import numpy as np
 
-from config import API_KEY, OUTPUT_DIR
+from config import API_KEY, OUTPUT_DIR, GEOJSON_PATH
 from load_points import load_midpoints
 from download_image import download_images_for_temp
 from segmentation import load_segmentation_model, run_segmentation
@@ -25,9 +25,6 @@ FOV = 70                  # Field of View (degrees)
 # Main Entry
 # ==============================
 if __name__ == "__main__":
-    # GEOJSON_PATH = "/home/slieu3/CS_sidewalk/complete_street/3rd_top_10_road_segments_ver3/top_10_road_segments_v3.0_pano.geojson"
-    GEOJSON_PATH = "/home/slieu3/CS_bikelane/for_GIT_test/POINT_EPSG4326.geojson"
-
     # ------------------------------
     # Step 0: Load candidate points
     # ------------------------------
