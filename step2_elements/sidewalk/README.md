@@ -26,6 +26,9 @@ This repository provides tools to estimate sidewalk width (in meters) using two 
 - **Python scripts** in `utils_automation`  
   Contains modularized Python scripts supporting the automated pipeline. The main workflow can be executed via main.py
 
+- **`/outputs_automation`**
+  Directory containing downloaded images, segmentation masks, and estimated width outputs generated automatically when running the tool on the example input file.
+
 - **`/manual_collection`**
   Includes guidance and scripts for manual labeling of sidewalk edges.
 
