@@ -94,10 +94,10 @@ The model's architecture is defined by three key dimensions: a late-stage concat
 <p align="center"> <img src="fig/overview_bike_lane.png" width="640" alt="Overview of the multimodal bike lane classification pipeline"> </p>
 
 ###  Key Architectural Features:
-  - ***Input Modalities***: The model processes three co-located images for each road segment: two Google Street View images captured from opposite directions and one satellite image. All input images are resized to 384 × 384 pixels.
-  - ***Feature Extraction***: Each of the three images is independently passed through its own parallel Swin Transformer (Swin-S) backbone to extract high-level feature representations. This late-stage approach allows each modality's features to be fully processed before integration.
-  - ***Decision-Level Fusion***: Rather than combining feature vectors, this model fuses the predictions from each modality. Each of the three feature sets is passed to a separate classification head to produce independent predictions (logits). These logits are then aggregated using a learnable weighted average to produce a final, unified prediction.
-  - ***Hierarchical Classification***: The model decomposes the classification task into a two-stage process to improve accuracy.
+  - **Input Modalities**: The model processes three co-located images for each road segment: two Google Street View images captured from opposite directions and one satellite image. All input images are resized to 384 × 384 pixels.
+  - **Feature Extraction**: Each of the three images is independently passed through its own parallel Swin Transformer (Swin-S) backbone to extract high-level feature representations. This late-stage approach allows each modality's features to be fully processed before integration.
+  - **Decision-Level Fusion**: Rather than combining feature vectors, this model fuses the predictions from each modality. Each of the three feature sets is passed to a separate classification head to produce independent predictions (logits). These logits are then aggregated using a learnable weighted average to produce a final, unified prediction.
+  - **Hierarchical Classification**: The model decomposes the classification task into a two-stage process to improve accuracy.
     - Presence Detection: The first stage determines if a bike lane of any type is present.
     - Type Classification: If a bike lane is detected, the second stage classifies it as either designated or protected.
 
@@ -106,5 +106,5 @@ For details on the training process and ablation studies across three architectu
 <br>
 <br>
 
-### References
+## References
 If you use this model, please cite the following paper:
