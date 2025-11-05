@@ -26,6 +26,9 @@ This repository provides tools to estimate sidewalk width (in meters) using two 
 - **`/output_automation`**
   Example outputs (e.g., images and estimated widths) for a sample input file with five points in Atlanta.
 
+- **`/outputs_automation`**
+  Directory containing downloaded images, segmentation masks, and estimated width outputs generated automatically when running the tool on the example input file.
+
 - **`/manual_collection`**
   Scripts and instructions for manual edge annotation of sidewalks.
 
