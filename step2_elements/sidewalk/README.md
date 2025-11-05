@@ -26,9 +26,6 @@ A GeoJSON file of road segment points.
 - **`/utils_automation`**
   Includes python modules that implement the automated pipeline. The main workflow can be executed via main.py.
 
-- **`/output_automation`**
-  Example outputs (e.g., images and estimated widths) for a sample input file with five points in Atlanta.
-
 - **`/outputs_automation`**
   Directory containing downloaded images, segmentation masks, and estimated width outputs generated automatically when running the tool on the example input file.
 
