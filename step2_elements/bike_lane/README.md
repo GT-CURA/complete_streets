@@ -78,7 +78,7 @@ The script expects `bike_lane_classification_min_fp16.pt` in your working direct
   # "https://github.com/GT-CURA/complete_streets/releases/download/v0.1.0/bike_lane_classification_min_fp16.pt"
    ```
    
-### 5. Run the Python Script
+### 4. Run the Python Script
 ```bash
 python classify_bikelanes.py
 ```
