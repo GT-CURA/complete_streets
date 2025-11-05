@@ -139,7 +139,7 @@ def estimate_sidewalk_width(combined_lines_df, save_dir, link_id=None, side=None
 
     # Step 4: solve for target pitch using your equations
     T_init_top = 8 if p_10_top < 0 else 13
-    T_init_bottom = 13
+    T_init_bottom = 8 if p_10_bottom < 0 else 13
     T_sol_top = fsolve(equations_top, T_init_top, args=(p_0_top, p_10_top))
     T_sol_bottom = fsolve(equations_bottom, T_init_bottom, args=(p_0_bottom, p_10_bottom))
 

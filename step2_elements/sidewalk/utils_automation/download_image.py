@@ -8,7 +8,7 @@ def get_streetview_image(panoid, heading, fov, pitch, save_dir, side):
     url = f"{base_url}?size=640x640&pano={panoid}&heading={heading}&fov={fov}&pitch={pitch}&source=outdoor&key={API_KEY}"
 
     # Folder first groups by panoid+heading
-    folder_name = str(panoid)
+    folder_name = str(panoid)        # only panoid
     folder_path = os.path.join(save_dir, folder_name, side)
     os.makedirs(folder_path, exist_ok=True)
 
@@ -35,10 +35,10 @@ def adjust_heading(pano_heading, bearing):
     else:
         adjusted = pano_heading - 90
 
-    return adjusted % 360
+    return adjusted % 360   # keep in [0, 360)
 
 
-def download_images_for_temp(temp_gdf, pitch_values=[0, -10], fov=70, save_dir=OUTPUT_DIR):
+def download_images_for_temp(temp_gdf, pitch_values=[0, -10], fov=65, save_dir=OUTPUT_DIR):
     """Download images for each side (side1, side2) with adjusted headings."""
     all_results = {}
 
@@ -48,15 +48,25 @@ def download_images_for_temp(temp_gdf, pitch_values=[0, -10], fov=70, save_dir=O
         bearing = row["bearing"]
         side = row["side"]   # side1 or side2
 
+        # Calculate diff to determine FOV
+        diff = abs(pano_heading - bearing)
+        diff = diff if diff <= 180 else 360 - diff
+        
+        # Set FOV based on diff condition
+        if diff <= 45 or diff >= 315:
+            current_fov = 95 
+        else:
+            current_fov = fov   
+
         heading = adjust_heading(pano_heading, bearing)
 
-        print(f"\n📍 Processing link_id={row['link_id']} | {side} | panoid={panoid} | heading={heading}")
+        # print(f"\n📍 Processing link_id={row['link_id']} | {side} | panoid={panoid} | heading={heading} | FOV={current_fov}")
 
         for pitch in pitch_values:
             img_path = get_streetview_image(
                 panoid=panoid,
                 heading=heading,
-                fov=fov,
+                fov=current_fov,
                 pitch=pitch,
                 save_dir=save_dir,
                 side=side
