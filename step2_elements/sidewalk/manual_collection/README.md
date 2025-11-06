@@ -43,12 +43,16 @@ From these annotations, the tool computes a refined **estimated sidewalk width**
 <br>
 
 ## 📦 Features:
-- **`POINT_EPSG4326.geojson`**
-  Example input file (5 sample points in Atlanta). Replace with your own points of interest.
-  
 - **Jupyter Lab Scripts (.ipynb)** 
   1. **0_filter.ipynb**: Identifies invalid cases where the automated tool produced NaN or unrealistic widths (e.g., <1.0 m or >5.0 m). 
   2. **1_manual_annotation.ipynb**:  Launches the interactive Jupyter-based annotation interface for manual correction.
+     
+- **`invalid_cases.csv`**
+  Contains all road segment points where the automated sidewalk width estimation failed or produced implausible results (e.g., NaN, <1.0 m, or >5.0 m). These cases require manual annotation using the interactive tool.
+
+- **`valid_cases.csv`**
+  Includes all records with valid sidewalk width estimates within the acceptable range.
+
 
 - **`/outputs`**
   Stores newly downloaded imagery and the final annotation CSV file (`manual_collection_invalid.csv`).
