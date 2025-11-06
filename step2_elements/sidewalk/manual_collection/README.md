@@ -84,7 +84,7 @@ These invalid cases will later be reviewed and corrected in the manual annotatio
 ### 6. Run `1_manual_annotation.ipynb`
 Open and execute the notebook `0_filter.ipynb`. In the first cell, update the paths and API key so they match your environment. After editing these values, run the next cell. It will start the manual annotation interface, which looks like this:
 
-<p align="center"> <img src="fig/tool_layout.png" width="640" alt="Layout of the interface tool"> </p>
+<p align="left"> <img src="fig/tool_layout.png" width="940" alt="Layout of the interface tool"> </p>
 
 To estimate the sidewalk width, click the top and bottom edges of the sidewalk in both pitch views (0° and −10°).
 After placing all four points, the tool automatically computes and displays the estimated width in meters.
