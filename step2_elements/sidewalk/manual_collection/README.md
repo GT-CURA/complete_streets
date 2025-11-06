@@ -47,14 +47,14 @@ From these annotations, the tool computes a refined **estimated sidewalk width**
   1. **0_filter.ipynb**: Identifies invalid cases where the automated tool produced NaN or unrealistic widths (e.g., <1.0 m or >5.0 m). 
   2. **1_manual_annotation.ipynb**:  Launches the interactive Jupyter-based annotation interface for manual correction.
      
-- **`invalid_cases.csv`**
-  Contains all road segment points where the automated sidewalk width estimation failed or produced implausible results (e.g., NaN, <1.0 m, or >5.0 m). These cases require manual annotation using the interactive tool.
+- **`invalid_cases.csv`** *example output*  
+  Contains all road segment points where the automated sidewalk width estimation failed or produced implausible results. These cases require manual annotation using the interactive tool. *Example output*
 
-- **`valid_cases.csv`**
+- **`valid_cases.csv`** *example output*  
   Includes all records with valid sidewalk width estimates within the acceptable range.
 
 
-- **`/outputs`**
+- **`/outputs`** *example output*  
   Stores newly downloaded imagery and the final annotation CSV file (`manual_collection_invalid.csv`).
 
 <br>
