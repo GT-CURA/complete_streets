@@ -1,87 +1,58 @@
-# Automated Sidewalk Width Estimation
+# Estimating Number of Lanes for Each Road Segment
 
 ## 📍 Objective
-This repository provides a computer vision pipeline to detect sidewalks in Google Street View images and estimate their **width** in meters. It uses a semantic segmentation model to identify sidewalk pixels and a geometric model to calculate width based on images taken from different camera pitch angles.
+This guide explains the process of estimating the **number of lanes** for each road segment using OpenStreetMap (OSM) data.  
+The algorithm in `step1_loader/generate_points_lines.ipynb` retrieves nearby road edges around a given coordinate of interest (COI) and determines both the **median presence** and **lane count** of the nearest segment(s).
 
-- **Input:** A GeoJSON file of road segment points.  
-- **Process:**  
-  1. Downloads Google Street View images for each point at two camera pitches (0° and -10°).
-  2. Runs a SegFormer semantic segmentation model to identify sidewalks in each image.
-  3. Applies image processing to extract the top and bottom edges of the detected sidewalks.
-  4. Uses the pixel coordinates of the edges from both pitches to solve a system of geometric equations.
-- **Output:**  
-  - A CSV file for each input point containing the estimated `width` and an `error_code`. 
-  - All downloaded images, segmentation masks, and intermediate line-detection visualizations are saved locally in the `/outputs` directory.
+We assign the total number of lanes per segment by collapsing and summing the OSM `lanes` attributes, accounting for dual carriageways when detected.
 
+<img src="fig/fig1.png" alt="Road Segment Point Sampling Workflow" width="600">
 
-## 📦 Features:
-- **`POINT_EPSG4326.geojson`**
-  Example input file (5 sample points in Atlanta). Replace with your own points of interest.
+### Input
+The same input used in `generate_points_lines.ipynb`, typically:
+- A point-based GeoDataFrame defining road segment locations (COI)
+- Radius or bounding box distance (`dist`) defining the search extent
 
-- **`sidewalk_env.yml`**  
-  Conda environment specification with pinned package versions for reproducible setup.  
+### Process
+1. **Download the OSM Road Network**  
+   - Retrieve nearby road geometries using **OSMnx** with a custom highway filter  
+     (`"trunk|primary|secondary|tertiary|residential|unclassified"`).  
+   - The function `graph_from_point()` builds a subgraph centered on each COI.  
 
-- **`mmsegmentation/`**  
-  This required directory contains the model configurations and will store the downloaded model checkpoint for semantic segmentation. For more details on the underlying library, see the MMSegmentation GitHub repository.
+2. **Preprocess Network Data**  
+   - Compute directional bearings for each edge (`ox.bearing.add_edge_bearings`).  
+   - Project the graph into an appropriate UTM CRS for spatial distance operations.  
 
-- **`/outputs/`**  
-  An automatically created folder for storing all downloaded imagery, segmentation results, and final CSV predictions.
+3. **Find Nearest Edges**  
+   - Calculate Euclidean distance between each road edge and the COI.  
+   - Keep the two closest edges (`edges_nearest`) as potential carriageway pairs.  
 
-- **Python scripts** in `utils`  
-  The project is modularized into several scripts. `main.py` is the main entry point that orchestrates the entire download, segmentation, and analysis pipeline.
+4. **Determine Road Type (Single vs Dual Carriageway)**  
+   - Check if both nearest edges are one-way and have opposite bearings.  
+   - If so → classify as **dual carriageway** and set `median = "yes"`.  
+   - Otherwise → classify as **single carriageway** (`median = "no"`).  
 
+5. **Estimate Number of Lanes**  
+   - Collapse and clean the OSM `lanes` attribute using the `collapse_lanes()` function.  
+   - If two opposing one-way segments form a dual carriageway, **sum** their lane counts.  
+   - If the `lanes` attribute is missing, assign a default value of 1.  
+   - Store the result in a new column `lanes_collapsed`.  
+
+6. **Cut and Export Road Segment Geometry**  
+   - Split the nearest edge at the projected COI location.  
+   - Save a new road segment record containing:
+     - `link_id`, `osmid`, `road_type`, `median`, `lanes_collapsed`, and geometry.
+
+### Output
+A CSV file showing the information on the presence of road median for each road segment:
+- `lanes_collapsed`: total number of lanes (summed if dual carriageway)  
+- `road_type`: OSM road classification  
+- `length_new`: segment length (in meters)
 
 ## 🚗 Quick Guide
-1. **Install conda environment**
-   ```bash
-   conda env create -f sidewalk_env.yml
-   conda activate sidewalk_env
-   ```
-    
-2. **Set Up the Segmentation Model**
-The pipeline uses a configuration and checkpoint from the OpenMMLab MMSegmentation repository. You must clone the repository and download the weights.
+### 1. Environment Setup
+- Use the same Python environment as specified for `step1_loader` (which includes `osmnx`, `geopandas`, `shapely`, and `pandas`).
 
-  1. Clone the `mmsegmentation` repository
-   ```bash
-   git clone https://github.com/open-mmlab/mmsegmentation.git
-   ```
-
-   2. Create a `checkpoints` directory inside it and download the model:
-  ```bash
-   # Navigate into the new folder
-   cd mmsegmentation
-   
-   # Create the directory
-   mkdir checkpoints
-  
-   # Download the weights into that directory
-   wget -P checkpoints/ https://download.openmmlab.com/mmsegmentation/v0.5/segformer/segformer_mit-b5_8x1_1024x1024_160k_cityscapes/segformer_mit-b5_8x1_1024x1024_160k_cityscapes_20211206_072934-87a052ec.pth
-   ```
-
-3. **Prepare input data**
-  - Place your road segment GeoJSON file (generated via step1_loader) in the working directory, or use the provided toy dataset for testing.
-  - Open `config.py` and edit the following variables:
-    - [Line 6] Enter your Google API Key to allow imagery downloads.
-    - [Line 10, 11] Verify that these paths correctly point to the files inside the `mmsegmentation` directory you just cloned.
-    - [Line 18] Set the path where you want to save all outputs.
-
-   
-4. **Run the Python script**
-Execute the main script from your terminal. The program will process each link_id from your GeoJSON sequentially.
-```bash
-python main.py
-```
-
-## 🔎 Descriptions
-For details regarding the methodology please find the [paper](https://doi.org/10.1177/23998083251369602).
-
-### References
-If you use this model, please cite the following paper: 
-
-```bibtex
-@article{your_article,
-  title   = {A novel approach for estimating sidewalk width from street view images and computer vision},
-  author  = {Lieu, S. J., & Guhathakurta, S.},
-  journal = {Environment and Planning B: Urban Analytics and City Science},
-  year    = {2025}
-}
+### 2. Run the Automated Pipeline  
+- The `generate_points_lines.ipynb` notebook implements the geometric analysis pipeline for median detection under the `step1_loader` directory.  
+- It includes functions for loading, cleaning, and analyzing road segment geometries.
