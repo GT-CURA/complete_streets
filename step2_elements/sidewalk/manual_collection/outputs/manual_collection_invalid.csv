@@ -1,0 +1,4 @@
+link_id,point_id,side,pano_id,pano_heading,original_width,fov,top_x_p0,top_y_p0,bot_x_p0,bot_y_p0,top_x_p10,top_y_p10,bot_x_p10,bot_y_p10,top_dist_p0,bot_dist_p0,top_dist_p10,bot_dist_p10,no_sidewalk,estimated_width
+cluster2_secondary_57_3,3,side2,r0exjCKZMcxyKPBm94vfow,91.45841217041016,,30,415.0,466.0,416.0,490.0,404.0,257.0,400.0,279.0,146.0,170.0,-63.0,-41.0,False,2.745318743529075
+cluster2_secondary_40_3,3,side1,loIOq6TXqqHIHVI1nwNfeQ,14.80349063873291,5.54,95,577.0,459.0,584.0,554.0,554.0,397.0,562.0,478.0,139.0,234.0,77.0,158.0,False,2.376432781104578
+cluster2_secondary_15_6,3,side1,n_M_6W5jQl9HriGpRC5blw,33.03184509277344,5.79,75,393.0,416.0,398.0,460.0,398.0,342.0,403.0,382.0,96.0,140.0,22.0,62.0,False,3.2645727466829566

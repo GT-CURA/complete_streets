@@ -11,18 +11,7 @@ Our automated pipeline estimates sidewalk width from street view imagery using s
 
 <br>
 
-Because we don't have a perfect segmentation model (and can't handle every issue automatically), this tool provides a **Jupyter-based manual annotation interface** that allows a human annotator to directly review and correct failed results.
-
-<br>
-
-With this tool, you can:
-- Inspect the original street view imagery collected by the automated tool  
-- Move **forward/backward** along the road segment to find a better panorama  
-- **Zoom in / out** to better capture visible sidewalk edges  
-- Manually mark **top** and **bottom** sidewalk edges in two images (pitch 0° and pitch −10°)  
-- Mark a location as **“No Sidewalk”** when appropriate  
-
-From these annotations, the tool computes a refined **estimated sidewalk width** and saves all results into a CSV file.
+Because we don't have a perfect segmentation model (and can't handle every issue automatically), this tool provides a **Jupyter-based manual annotation interface** that enables users to directly mark sidewalk edges, explore alternative imagery, and compute an estimated sidewalk width.
 
 ### Input:
 - A GeoJSON file of road segment points (Same as used in the automated tool)
@@ -43,14 +32,18 @@ From these annotations, the tool computes a refined **estimated sidewalk width**
 <br>
 
 ## 📦 Features:
-- **`POINT_EPSG4326.geojson`**
-  Example input file (5 sample points in Atlanta). Replace with your own points of interest.
-  
 - **Jupyter Lab Scripts (.ipynb)** 
   1. **0_filter.ipynb**: Identifies invalid cases where the automated tool produced NaN or unrealistic widths (e.g., <1.0 m or >5.0 m). 
   2. **1_manual_annotation.ipynb**:  Launches the interactive Jupyter-based annotation interface for manual correction.
+     
+- **`invalid_cases.csv`** *example output*  
+  Contains all road segment points where the automated sidewalk width estimation failed or produced implausible results. These cases require manual annotation using the interactive tool. *Example output*
 
-- **`/outputs`**
+- **`valid_cases.csv`** *example output*  
+  Includes all records with valid sidewalk width estimates within the acceptable range.
+
+
+- **`/outputs`** *example output*  
   Stores newly downloaded imagery and the final annotation CSV file (`manual_collection_invalid.csv`).
 
 <br>
@@ -91,7 +84,7 @@ These invalid cases will later be reviewed and corrected in the manual annotatio
 ### 6. Run `1_manual_annotation.ipynb`
 Open and execute the notebook `0_filter.ipynb`. In the first cell, update the paths and API key so they match your environment. After editing these values, run the next cell. It will start the manual annotation interface, which looks like this:
 
-[img]
+<p align="left"> <img src="fig/tool_layout.png" width="940" alt="Layout of the interface tool"> </p>
 
 To estimate the sidewalk width, click the top and bottom edges of the sidewalk in both pitch views (0° and −10°).
 After placing all four points, the tool automatically computes and displays the estimated width in meters.

@@ -20,16 +20,16 @@ A GeoJSON file of road segment points.
 <br>
 
 ## 📦 Features:
-- **`POINT_EPSG4326.geojson`**
+- **`POINT_EPSG4326.geojson`**  
   Example input file (5 sample points in Atlanta). You can replace this with your own GeoJSON of points along road segments derived from `step1_loader`.
   
-- **`/utils_automation`**
+- **`/utils_automation`**  
   Includes python modules that implement the automated pipeline. The main workflow can be executed via main.py.
 
-- **`/outputs_automation`**
+- **`/outputs_automation`** *example output*  
   Directory containing downloaded images, segmentation masks, and estimated width outputs generated automatically when running the tool on the example input file.
 
-- **`/manual_collection`**
+- **`/manual_collection`**  
   Scripts and instructions for manual edge annotation of sidewalks.
 
 <br>
