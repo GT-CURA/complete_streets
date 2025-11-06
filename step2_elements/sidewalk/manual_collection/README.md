@@ -99,7 +99,7 @@ After placing all four points, the tool automatically computes and displays the 
 <br>
 
 If the sidewalk is not clearly visible or the image quality is poor, you can use the following buttons to explore alternative imagery. Additional controls are also provided to help you perform the annotation step by step:
-- ⬅ Prev row / Save & Next: Move to the previous/next record in the invalid cases.
+- Prev row / Save & Next: Move to the previous/next record in the invalid cases.
 - Pitch 0 / -10: Toggle between the two vertical viewing angles (0° and −10°) for the same pano.
 - Prev / Next image point: Move backward/forward along the road segment to a different camera location for the same link/side. The tool downloads new street view images.
 - Zoom in / out: Decrease/increase the field of view (FOV). The tool downloads new street view images.
