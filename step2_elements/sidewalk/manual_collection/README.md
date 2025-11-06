@@ -11,18 +11,7 @@ Our automated pipeline estimates sidewalk width from street view imagery using s
 
 <br>
 
-Because we don't have a perfect segmentation model (and can't handle every issue automatically), this tool provides a **Jupyter-based manual annotation interface** that allows a human annotator to directly review and correct failed results.
-
-<br>
-
-With this tool, you can:
-- Inspect the original street view imagery collected by the automated tool  
-- Move **forward/backward** along the road segment to find a better panorama  
-- **Zoom in / out** to better capture visible sidewalk edges  
-- Manually mark **top** and **bottom** sidewalk edges in two images (pitch 0° and pitch −10°)  
-- Mark a location as **“No Sidewalk”** when appropriate  
-
-From these annotations, the tool computes a refined **estimated sidewalk width** and saves all results into a CSV file.
+Because we don't have a perfect segmentation model (and can't handle every issue automatically), this tool provides a **Jupyter-based manual annotation interface** that enables users to directly mark sidewalk edges, explore alternative imagery, and compute an estimated sidewalk width.
 
 ### Input:
 - A GeoJSON file of road segment points (Same as used in the automated tool)
@@ -95,7 +84,7 @@ These invalid cases will later be reviewed and corrected in the manual annotatio
 ### 6. Run `1_manual_annotation.ipynb`
 Open and execute the notebook `0_filter.ipynb`. In the first cell, update the paths and API key so they match your environment. After editing these values, run the next cell. It will start the manual annotation interface, which looks like this:
 
-[img]
+<p align="center"> <img src="fig/tool_layout.png" width="640" alt="Layout of the interface tool"> </p>
 
 To estimate the sidewalk width, click the top and bottom edges of the sidewalk in both pitch views (0° and −10°).
 After placing all four points, the tool automatically computes and displays the estimated width in meters.
