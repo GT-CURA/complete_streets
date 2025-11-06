@@ -90,15 +90,25 @@ To estimate the sidewalk width, click the top and bottom edges of the sidewalk i
 
 *Note* Similar to the automated algorithm, please mark the points at approximately the same horizontal position across the two pitch angles (0° and −10°).
 
-<p align="left"> <img src="fig/demo.gif" alt="Manual Annotation Demo - Zoom" width="840"> </p>
+##### Zoom In and Annotate Sidewalk Edges
+<p align="left"> <img src="fig/zoom.gif" alt="Manual Annotation Demo - Zoom" width="640"> </p>
 
-<p align="left"> <img src="fig/demo.gif" alt="Manual Annotation Demo - Change Location" width="840"> </p>
+<br>
 
-If the sidewalk is not clearly visible or the image quality is poor, you can use the following buttons to explore alternative imagery. Additional controls are also provided to help you perform the annotation step by step:
-- Prev row / Save & Next: Move to the previous/next record in the invalid cases.
-- Pitch 0 / -10: Toggle between the two vertical viewing angles (0° and −10°) for the same pano.
+##### Move Camera Location and Annotate Sidewalk Edges
+<p align="left"> <img src="fig/change.gif" alt="Manual Annotation Demo - Change Location" width="640"> </p>
+
+<br>
+
+If the sidewalk is not clearly visible or the image quality is poor, you can use the following buttons to explore alternative imagery:
 - Prev / Next image point: Move backward/forward along the road segment to a different camera location for the same link/side. The tool downloads new street view images.
 - Zoom in / out: Decrease/increase the field of view (FOV). The tool downloads new street view images.
+
+<br>
+
+Additional controls are also provided to help you perform the annotation step by step:
+- Prev row / Save & Next: Move to the previous/next record in the invalid cases.
+- Pitch 0 / -10: Toggle between the two vertical viewing angles (0° and −10°) for the same pano.
 - Undo last: Remove the most recently placed point (bottom first, then top) for the current pitch.
 - Reset points: Clear both top and bottom points for the current pitch.
 - Mark / Clear 'No Sidewalk': Flag the current location as having no sidewalk, or remove that flag.
@@ -106,6 +116,8 @@ If the sidewalk is not clearly visible or the image quality is poor, you can use
 - Export CSV: Save all current annotations and the computed estimated_width values (e.g., `manual_collection_invalid.csv` inside `/outputs`.)
 
 *Note* Don’t forget to click **Export CSV** before exiting the interface to ensure all annotations are saved. Each time you zoom in/out or move the camera location, the tool makes one Google Street View API call.
+
+<br>
 
 ### References
 If you use this model, please cite the following paper: 
