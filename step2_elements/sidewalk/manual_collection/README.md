@@ -90,7 +90,9 @@ To estimate the sidewalk width, click the top and bottom edges of the sidewalk i
 
 *Note* Similar to the automated algorithm, please mark the points at approximately the same horizontal position across the two pitch angles (0° and −10°).
 
-<br>
+<p align="left"> <img src="fig/demo.gif" alt="Manual Annotation Demo - Zoom" width="840"> </p>
+
+<p align="left"> <img src="fig/demo.gif" alt="Manual Annotation Demo - Change Location" width="840"> </p>
 
 If the sidewalk is not clearly visible or the image quality is poor, you can use the following buttons to explore alternative imagery. Additional controls are also provided to help you perform the annotation step by step:
 - Prev row / Save & Next: Move to the previous/next record in the invalid cases.
