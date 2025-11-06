@@ -26,9 +26,6 @@ A GeoJSON file of road segment points.
 - **`/utils_automation`**
   Includes python modules that implement the automated pipeline. The main workflow can be executed via main.py.
 
-- **`/output_automation`**
-  Example outputs (e.g., images and estimated widths) for a sample input file with five points in Atlanta.
-
 - **`/outputs_automation`**
   Directory containing downloaded images, segmentation masks, and estimated width outputs generated automatically when running the tool on the example input file.
 
@@ -54,12 +51,12 @@ Below is an example setup on a machine that supports *PyTorch with CUDA 11.8*. I
   
 #### 2. Install PyTorch (GPU example with CUDA 11.8) <br>
 For CUDA 11.8 on Linux:
-    ```bash   
-    conda install pytorch torchvision pytorch-cuda=11.8 -c pytorch -c nvidia
-
-    # Quick check
-    python -c "import torch; print(torch.cuda.is_available(), torch.version.cuda)"
-    ```
+  ```bash   
+  conda install pytorch torchvision pytorch-cuda=11.8 -c pytorch -c nvidia
+  
+  # Quick check
+  python -c "import torch; print(torch.cuda.is_available(), torch.version.cuda)"
+  ```
 
 #### 3. Install MMCV
   ```bash
