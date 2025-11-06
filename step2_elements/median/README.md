@@ -21,6 +21,8 @@ The input required is the same as that used in `generate_points_lines.ipynb` —
 A CSV file showing the information on the presence of road median for each road segment:
 - `median`: `"yes"` (dual carriageway) or `"no"` (single carriageway)
 
+<br>
+<br>
 
 ## 🚗 Quick Guide
 ### 1. Environment Setup
