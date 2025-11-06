@@ -86,8 +86,9 @@ Open and execute the notebook `0_filter.ipynb`. In the first cell, update the pa
 
 <p align="left"> <img src="fig/tool_layout.png" width="940" alt="Layout of the interface tool"> </p>
 
-To estimate the sidewalk width, click the top and bottom edges of the sidewalk in both pitch views (0° and −10°).
-After placing all four points, the tool automatically computes and displays the estimated width in meters.
+To estimate the sidewalk width, click the top and bottom edges of the sidewalk in both pitch views (0° and −10°). After placing all four points, the tool automatically computes and displays the estimated width in meters.
+
+*Note* Similar to the automated algorithm, please mark the points at approximately the same horizontal position across the two pitch angles (0° and −10°).
 
 <br>
 
