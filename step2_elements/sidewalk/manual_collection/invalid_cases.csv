@@ -1,0 +1,4 @@
+link_id,point_id,bearing,side,pano_id,pano_lat,pano_lon,pano_heading,pano_date,width,error_code,validity
+cluster2_secondary_57_3,3,271.5461434701452,side2,r0exjCKZMcxyKPBm94vfow,33.76410890876173,-84.37999004746703,91.45841217041016,2024-07,,,invalid
+cluster2_secondary_40_3,3,15.115987375690825,side1,loIOq6TXqqHIHVI1nwNfeQ,33.77609306199499,-84.37051995817278,14.80349063873291,2024-11,5.54,,invalid
+cluster2_secondary_15_6,2,33.245947415174584,side1,xeq_JaPnD0QkZ1hNjmGBQQ,33.74763052254168,-84.39225826180449,32.16468048095703,2024-07,5.79,,invalid
