@@ -1,17 +1,17 @@
-# Automated Sidewalk Width Estimation
+# Automated Street Buffer Width Estimation
 
 ## 📍 Objective
-This repository provides tools to estimate sidewalk width (in meters) using two Google Street View images captured at different camera pitch angles. It includes both an automated model and a manual annotation tool.
-- Automated Model: Uses a semantic segmentation model (SegFormer) to detect sidewalk pixels, then applies Canny edge detection to locate the top and bottom sidewalk edges. A simple geometric model converts pixel distances (from two pitch angles) into physical width.
-- Manual Annotation Tool: A Jupyter-based interface for manually marking sidewalk edges when the automated pipeline fails or is uncertain. It uses the same geometric model to estimate width. Code and instructions are available in the `/manual_collection` directory.
+This repository provides tools to estimate street buffer width (in meters) using the same methodology originally developed for sidewalk width estimation. It includes both an automated model and a manual annotation tool.
+- Automated Model: Uses a semantic segmentation model (SegFormer) to road and sidewalk regions, then applies Canny edge detection to extract the bottom sidewalk edge and the top road edge (curb line). A geometric model converts the pixel distance between these two edges (observed from two different pitch angles) into a physical width measurement. If the sidewalk and road edges are aligned (i.e., no visible street buffer), the returned width value is *None(.
+- Manual Annotation Tool: A Jupyter-based interface for manually marking the sidewalk bottom edge and road curb line when the automated pipeline fails or is uncertain. It uses the same geometric model to estimate width. Code and instructions are available in the `/manual_collection` directory.
 
 ### Input: 
-A GeoJSON file of road segment points.  
+A GeoJSON file of road segment points.
 ### Process:  
   1. Download Google Street View images for each point at two pitches (0° and -10°).
-  2. Run a SegFormer semantic segmentation model to identify sidewalks in each image.
-  3. Extract top and bottom sidewalk edges from segmentation masks.
-  4. Use pixel coordinates of the edges from both pitches to solve a of geometric system and estimate sidewalk width.
+  2. Run a SegFormer semantic segmentation model to identify sidewalk and road regions in each image.
+  3. Extract the bottom sidewalk edge and the top road edge (i.e., curb line) from segmentation masks.
+  4. Use pixel coordinates of these edges from both pitches to solve a geometric system and estimate street buffer width in meters.
 ### Output:
   - A CSV file for each input point containing the estimated `width`. 
   - All downloaded images, segmentation masks, and intermediate line-detection visualizations are saved locally in the `/outputs` directory.
@@ -45,8 +45,8 @@ Below is an example setup on a machine that supports *PyTorch with CUDA 11.8*. I
 
 #### 1. Create and activate Conda environment
    ```bash   
-   conda create --name sidewalk_width python=3.8 -y
-   conda activate sidewalk_width
+   conda create --name streetbuffer_width python=3.8 -y
+   conda activate streetbuffer_width
    ```
   
 #### 2. Install PyTorch (GPU example with CUDA 11.8) <br>
@@ -85,7 +85,7 @@ Inside the `mmsegmentation` folder:
 
 <br>
 
-### 2. Install Utility Ddependencies
+### 2. Install Utility Dependencies
 After successfully setting up the semantic segmentation model, install the following dependencies:
   ```bash
   conda install -c conda-forge pillow requests -y
@@ -96,7 +96,7 @@ After successfully setting up the semantic segmentation model, install the follo
 - Place your road segment GeoJSON file (generated via step1_loader) in the working directory, or use the provided toy dataset for testing.
 - Open `config.py` and edit the following variables:
   - [Line 6] Enter your Google API Key to allow imagery downloads.
-  - [Line 9] Specify the directory path of yout input data file (.geojson).
+  - [Line 9] Specify the directory path of your input data file (.geojson).
   - [Line 13, 14] Provide the correct paths to the segmentation configuration and checkpoint files within the `mmsegmentation` directory you cloned earlier.
   - [Line 21] Define the output directory where all generated files and images will be saved.
 
@@ -112,7 +112,7 @@ From the `utils_automation` directory, execute the main script from your termina
 <br>
 
 ## 🔎 Descriptions
-For details about the methodology, please find the [paper](https://doi.org/10.1177/23998083251369602).
+For detailed information on the methodology used to estimate street buffer width, please refer to the [paper](https://doi.org/10.1177/23998083251369602). This paper presents a framework for estimating sidewalk width, and the same approach can be extended to street buffer estimation, since both sidewalk and street buffer surfaces lie on the ground plane and their corresponding edges are typically parallel to each other.
 
 <br>
 <br>
