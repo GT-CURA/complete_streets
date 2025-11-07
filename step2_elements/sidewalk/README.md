@@ -85,7 +85,7 @@ Inside the `mmsegmentation` folder:
 
 <br>
 
-### 2. Install Utility Ddependencies
+### 2. Install Utility Dependencies
 After successfully setting up the semantic segmentation model, install the following dependencies:
   ```bash
   conda install -c conda-forge pillow requests -y
@@ -96,7 +96,7 @@ After successfully setting up the semantic segmentation model, install the follo
 - Place your road segment GeoJSON file (generated via step1_loader) in the working directory, or use the provided toy dataset for testing.
 - Open `config.py` and edit the following variables:
   - [Line 6] Enter your Google API Key to allow imagery downloads.
-  - [Line 9] Specify the directory path of yout input data file (.geojson).
+  - [Line 9] Specify the directory path of your input data file (.geojson).
   - [Line 13, 14] Provide the correct paths to the segmentation configuration and checkpoint files within the `mmsegmentation` directory you cloned earlier.
   - [Line 21] Define the output directory where all generated files and images will be saved.
 
