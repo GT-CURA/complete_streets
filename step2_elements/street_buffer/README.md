@@ -13,7 +13,7 @@ A GeoJSON file of road segment points.
   3. Extract the bottom sidewalk edge and the top road edge (i.e., curb line) from segmentation masks.
   4. Use pixel coordinates of these edges from both pitches to solve a geometric system and estimate street buffer width in meters.
 ### Output:
-  - A CSV file for each input point containing the estimated `width`. 
+  - A CSV file for each input point containing the estimated `width`, `NaN`, or `None` (indicating no street buffer).
   - All downloaded images, segmentation masks, and intermediate line-detection visualizations are saved locally in the `/outputs` directory.
 
 <br>
