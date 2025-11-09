@@ -54,7 +54,7 @@ A GeoJSON file of road segment points.
    ```
 
 ### 2. Prepare Input Data
-  - Place your road segment GeoJSON file (generated via step1_loader) in the working directory, or use the provided toy dataset for testing.
+  - Place your road segment GeoJSON file (generated via step1_loader) in the working directory, or use the provided toy dataset (`POINT_EPSG4326.geojson`) for testing.
   - Open `classify_bikelanes.py` and edit:
     - [Line 4] Set the working directory where .py, .yml, .pt, and the GeoJSON file are stored.
     - [Line 8] Enter your Google API Key (enabled for Street View Static API and Map Tiles API) to allow imagery downloads.
