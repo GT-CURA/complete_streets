@@ -13,7 +13,7 @@ A GeoJSON file of road segment points.
   3. Extract top and bottom sidewalk edges from segmentation masks.
   4. Use pixel coordinates of the edges from both pitches to solve a of geometric system and estimate sidewalk width.
 ### Output:
-  - A CSV file for each input point containing the estimated `width`. 
+  - A CSV file for each input point containing the estimated sidewalk `width` or `NaN` (representing failed or unreliable sidewalk detection).
   - All downloaded images, segmentation masks, and intermediate line-detection visualizations are saved locally in the `/outputs` directory.
 
 <br>
