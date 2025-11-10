@@ -1,0 +1,12 @@
+# For local dev; install with: pip install -r requirements.txt
+pandas>=1.5,<3.0
+numpy>=1.23
+geopandas>=0.14
+shapely>=2.0
+pyproj>=3.5
+networkx>=2.8
+osmnx>=1.7
+folium>=0.14
+branca>=0.6
+rtree>=1.0
+click>=8.1
