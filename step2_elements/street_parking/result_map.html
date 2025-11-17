@@ -25,7 +25,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_98d82e3f270caf4fd915786198d52b0e {
+                #map_56b1e71602b2ea6ff9e86d8130156fb2 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -117,8 +117,8 @@
 <body>
     
     
-    <div id='maplegend parking' class='maplegend'>
-        <div class='legend-title'>parking</div>
+    <div id='maplegend parking_any' class='maplegend'>
+        <div class='legend-title'>parking_any</div>
         <div class='legend-scale'>
             <ul class='legend-labels'>
                 <li><span style='background:#ff4c4c'></span>False</li>
@@ -128,14 +128,14 @@
     </div>
     
     
-            <div class="folium-map" id="map_98d82e3f270caf4fd915786198d52b0e" ></div>
+            <div class="folium-map" id="map_56b1e71602b2ea6ff9e86d8130156fb2" ></div>
         
 </body>
 <script>
     
     
-            var map_98d82e3f270caf4fd915786198d52b0e = L.map(
-                "map_98d82e3f270caf4fd915786198d52b0e",
+            var map_56b1e71602b2ea6ff9e86d8130156fb2 = L.map(
+                "map_56b1e71602b2ea6ff9e86d8130156fb2",
                 {
                     center: [33.75739797940865, -84.38033551951493],
                     crs: L.CRS.EPSG3857,
@@ -147,13 +147,13 @@
 
                 }
             );
-            L.control.scale().addTo(map_98d82e3f270caf4fd915786198d52b0e);
+            L.control.scale().addTo(map_56b1e71602b2ea6ff9e86d8130156fb2);
 
             
 
         
     
-            var tile_layer_03ddfcd4f57ddf3957aa8490f42f0a68 = L.tileLayer(
+            var tile_layer_2a06034e7105535615cf7182bbc6f0f2 = L.tileLayer(
                 "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
                 {
   "minZoom": 0,
@@ -170,77 +170,77 @@
             );
         
     
-            tile_layer_03ddfcd4f57ddf3957aa8490f42f0a68.addTo(map_98d82e3f270caf4fd915786198d52b0e);
+            tile_layer_2a06034e7105535615cf7182bbc6f0f2.addTo(map_56b1e71602b2ea6ff9e86d8130156fb2);
         
     
-            map_98d82e3f270caf4fd915786198d52b0e.fitBounds(
+            map_56b1e71602b2ea6ff9e86d8130156fb2.fitBounds(
                 [[33.73842142654808, -84.41749497768149], [33.77637453226922, -84.34317606134837]],
                 {}
             );
         
     
-        function geo_json_1efa2042e84c6a769107d0929929266d_styler(feature) {
+        function geo_json_66bafe5e556fe9a654e469424b0f1344_styler(feature) {
             switch(feature.id) {
-                case "0": case "1": case "2": case "3": case "4": case "5": case "6": case "9": 
+                case "0": case "1": case "2": case "3": case "4": case "5": case "6": case "7": 
                     return {"alpha": 1, "color": "#ff4c4c", "fillColor": "#ff4c4c", "fillOpacity": 0.5, "weight": 5};
                 default:
                     return {"alpha": 1, "color": "#4cb2ff", "fillColor": "#4cb2ff", "fillOpacity": 0.5, "weight": 5};
             }
         }
-        function geo_json_1efa2042e84c6a769107d0929929266d_highlighter(feature) {
+        function geo_json_66bafe5e556fe9a654e469424b0f1344_highlighter(feature) {
             switch(feature.id) {
                 default:
                     return {"fillOpacity": 0.75};
             }
         }
-        function geo_json_1efa2042e84c6a769107d0929929266d_pointToLayer(feature, latlng) {
+        function geo_json_66bafe5e556fe9a654e469424b0f1344_pointToLayer(feature, latlng) {
             var opts = {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3};
             
-            let style = geo_json_1efa2042e84c6a769107d0929929266d_styler(feature)
+            let style = geo_json_66bafe5e556fe9a654e469424b0f1344_styler(feature)
             Object.assign(opts, style)
             
             return new L.CircleMarker(latlng, opts)
         }
 
-        function geo_json_1efa2042e84c6a769107d0929929266d_onEachFeature(feature, layer) {
+        function geo_json_66bafe5e556fe9a654e469424b0f1344_onEachFeature(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if(typeof e.target.setStyle === "function"){
-                            geo_json_1efa2042e84c6a769107d0929929266d.resetStyle(e.target);
+                            geo_json_66bafe5e556fe9a654e469424b0f1344.resetStyle(e.target);
                     }
                 },
                 mouseover: function(e) {
                     if(typeof e.target.setStyle === "function"){
-                        const highlightStyle = geo_json_1efa2042e84c6a769107d0929929266d_highlighter(e.target.feature)
+                        const highlightStyle = geo_json_66bafe5e556fe9a654e469424b0f1344_highlighter(e.target.feature)
                         e.target.setStyle(highlightStyle);
                     }
                 },
             });
         };
-        var geo_json_1efa2042e84c6a769107d0929929266d = L.geoJson(null, {
-                onEachFeature: geo_json_1efa2042e84c6a769107d0929929266d_onEachFeature,
+        var geo_json_66bafe5e556fe9a654e469424b0f1344 = L.geoJson(null, {
+                onEachFeature: geo_json_66bafe5e556fe9a654e469424b0f1344_onEachFeature,
             
-                style: geo_json_1efa2042e84c6a769107d0929929266d_styler,
-                pointToLayer: geo_json_1efa2042e84c6a769107d0929929266d_pointToLayer,
+                style: geo_json_66bafe5e556fe9a654e469424b0f1344_styler,
+                pointToLayer: geo_json_66bafe5e556fe9a654e469424b0f1344_pointToLayer,
             ...{
 }
         });
 
-        function geo_json_1efa2042e84c6a769107d0929929266d_add (data) {
-            geo_json_1efa2042e84c6a769107d0929929266d
+        function geo_json_66bafe5e556fe9a654e469424b0f1344_add (data) {
+            geo_json_66bafe5e556fe9a654e469424b0f1344
                 .addData(data);
         }
-            geo_json_1efa2042e84c6a769107d0929929266d_add({"bbox": [-84.41749497768149, 33.73842142654808, -84.34317606134837, 33.77637453226922], "features": [{"bbox": [-84.3923411685972, 33.74752065324655, -84.39198635833587, 33.74797225691444], "geometry": {"coordinates": [[-84.3923411685972, 33.74752065324655], [-84.39198635833587, 33.74797225691444]], "type": "LineString"}, "id": "0", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_15_6", "parking": false, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.3923411685972, 33.74752065324655, -84.39198635833587, 33.74797225691444], "geometry": {"coordinates": [[-84.3923411685972, 33.74752065324655], [-84.39198635833587, 33.74797225691444]], "type": "LineString"}, "id": "1", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_15_6", "parking": false, "side": "side2"}, "type": "Feature"}, {"bbox": [-84.41749497768149, 33.7610608004209, -84.41748900872608, 33.76160119941701], "geometry": {"coordinates": [[-84.41748900872608, 33.76160119941701], [-84.41749497768149, 33.7610608004209]], "type": "LineString"}, "id": "2", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_31_17", "parking": false, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.41749497768149, 33.7610608004209, -84.41748900872608, 33.76160119941701], "geometry": {"coordinates": [[-84.41748900872608, 33.76160119941701], [-84.41749497768149, 33.7610608004209]], "type": "LineString"}, "id": "3", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_31_17", "parking": false, "side": "side2"}, "type": "Feature"}, {"bbox": [-84.37062799947648, 33.77585326837052, -84.37045860319128, 33.77637453226922], "geometry": {"coordinates": [[-84.37062799947648, 33.77585326837052], [-84.37045860319128, 33.77637453226922]], "type": "LineString"}, "id": "4", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_40_3", "parking": false, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.37062799947648, 33.77585326837052, -84.37045860319128, 33.77637453226922], "geometry": {"coordinates": [[-84.37062799947648, 33.77585326837052], [-84.37045860319128, 33.77637453226922]], "type": "LineString"}, "id": "5", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_40_3", "parking": false, "side": "side2"}, "type": "Feature"}, {"bbox": [-84.38033372117333, 33.764149936068456, -84.37968675720366, 33.76416691647081], "geometry": {"coordinates": [[-84.38033372117333, 33.76416691647081], [-84.37968675720366, 33.764149936068456]], "type": "LineString"}, "id": "6", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_57_3", "parking": false, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.38033372117333, 33.764149936068456, -84.37968675720366, 33.76416691647081], "geometry": {"coordinates": [[-84.38033372117333, 33.76416691647081], [-84.37968675720366, 33.764149936068456]], "type": "LineString"}, "id": "7", "properties": {"__folium_color": "#4cb2ff", "class_nm": "permit", "confidence": 0.35, "consist_id": "cluster2_secondary_57_3__side2__1", "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_57_3", "parking": true, "side": "side2"}, "type": "Feature"}, {"bbox": [-84.34364819339514, 33.73842142654808, -84.34317606134837, 33.738790415905235], "geometry": {"coordinates": [[-84.34317606134837, 33.73842142654808], [-84.3435975, 33.7387508], [-84.34364819339514, 33.738790415905235]], "type": "LineString"}, "id": "8", "properties": {"__folium_color": "#4cb2ff", "class_nm": null, "confidence": null, "consist_id": "cluster2_tertiary_27_7__side1__3", "cosine_similarity": 0.8762513399124146, "dist_error": 3.8294805631454905, "link_id": "cluster2_tertiary_27_7", "parking": true, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.34364819339514, 33.73842142654808, -84.34317606134837, 33.738790415905235], "geometry": {"coordinates": [[-84.34317606134837, 33.73842142654808], [-84.3435975, 33.7387508], [-84.34364819339514, 33.738790415905235]], "type": "LineString"}, "id": "9", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_tertiary_27_7", "parking": false, "side": "side2"}, "type": "Feature"}], "type": "FeatureCollection"});
+            geo_json_66bafe5e556fe9a654e469424b0f1344_add({"bbox": [-84.41749497768149, 33.73842142654808, -84.34317606134837, 33.77637453226922], "features": [{"bbox": [-84.3923411685972, 33.74752065324655, -84.39198635833587, 33.74797225691444], "geometry": {"coordinates": [[-84.3923411685972, 33.74752065324655], [-84.39198635833587, 33.74797225691444]], "type": "LineString"}, "id": "0", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_15_6", "parking": false, "parking_any": false, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.3923411685972, 33.74752065324655, -84.39198635833587, 33.74797225691444], "geometry": {"coordinates": [[-84.3923411685972, 33.74752065324655], [-84.39198635833587, 33.74797225691444]], "type": "LineString"}, "id": "1", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_15_6", "parking": false, "parking_any": false, "side": "side2"}, "type": "Feature"}, {"bbox": [-84.41749497768149, 33.7610608004209, -84.41748900872608, 33.76160119941701], "geometry": {"coordinates": [[-84.41748900872608, 33.76160119941701], [-84.41749497768149, 33.7610608004209]], "type": "LineString"}, "id": "2", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_31_17", "parking": false, "parking_any": false, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.41749497768149, 33.7610608004209, -84.41748900872608, 33.76160119941701], "geometry": {"coordinates": [[-84.41748900872608, 33.76160119941701], [-84.41749497768149, 33.7610608004209]], "type": "LineString"}, "id": "3", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_31_17", "parking": false, "parking_any": false, "side": "side2"}, "type": "Feature"}, {"bbox": [-84.37062799947648, 33.77585326837052, -84.37045860319128, 33.77637453226922], "geometry": {"coordinates": [[-84.37062799947648, 33.77585326837052], [-84.37045860319128, 33.77637453226922]], "type": "LineString"}, "id": "4", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_40_3", "parking": false, "parking_any": false, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.37062799947648, 33.77585326837052, -84.37045860319128, 33.77637453226922], "geometry": {"coordinates": [[-84.37062799947648, 33.77585326837052], [-84.37045860319128, 33.77637453226922]], "type": "LineString"}, "id": "5", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_40_3", "parking": false, "parking_any": false, "side": "side2"}, "type": "Feature"}, {"bbox": [-84.38033372117333, 33.764149936068456, -84.37968675720366, 33.76416691647081], "geometry": {"coordinates": [[-84.38033372117333, 33.76416691647081], [-84.37968675720366, 33.764149936068456]], "type": "LineString"}, "id": "6", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_57_3", "parking": false, "parking_any": false, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.38033372117333, 33.764149936068456, -84.37968675720366, 33.76416691647081], "geometry": {"coordinates": [[-84.38033372117333, 33.76416691647081], [-84.37968675720366, 33.764149936068456]], "type": "LineString"}, "id": "7", "properties": {"__folium_color": "#ff4c4c", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_secondary_57_3", "parking": false, "parking_any": false, "side": "side2"}, "type": "Feature"}, {"bbox": [-84.34364819339514, 33.73842142654808, -84.34317606134837, 33.738790415905235], "geometry": {"coordinates": [[-84.34317606134837, 33.73842142654808], [-84.3435975, 33.7387508], [-84.34364819339514, 33.738790415905235]], "type": "LineString"}, "id": "8", "properties": {"__folium_color": "#4cb2ff", "class_nm": null, "confidence": null, "consist_id": "cluster2_tertiary_27_7__side1__3", "cosine_similarity": 0.8762513399124146, "dist_error": 3.678262894411792, "link_id": "cluster2_tertiary_27_7", "parking": true, "parking_any": true, "side": "side1"}, "type": "Feature"}, {"bbox": [-84.34364819339514, 33.73842142654808, -84.34317606134837, 33.738790415905235], "geometry": {"coordinates": [[-84.34317606134837, 33.73842142654808], [-84.3435975, 33.7387508], [-84.34364819339514, 33.738790415905235]], "type": "LineString"}, "id": "9", "properties": {"__folium_color": "#4cb2ff", "class_nm": null, "confidence": null, "consist_id": null, "cosine_similarity": null, "dist_error": null, "link_id": "cluster2_tertiary_27_7", "parking": false, "parking_any": true, "side": "side2"}, "type": "Feature"}], "type": "FeatureCollection"});
 
         
     
-    geo_json_1efa2042e84c6a769107d0929929266d.bindTooltip(
+    geo_json_66bafe5e556fe9a654e469424b0f1344.bindTooltip(
     function(layer){
     let div = L.DomUtil.create('div');
     
     let handleObject = feature=>typeof(feature)=='object' ? JSON.stringify(feature) : feature;
-    let fields = ["link_id", "side", "class_nm", "confidence", "consist_id", "dist_error", "cosine_similarity", "parking"];
-    let aliases = ["link_id", "side", "class_nm", "confidence", "consist_id", "dist_error", "cosine_similarity", "parking"];
+    let fields = ["link_id", "side", "class_nm", "confidence", "consist_id", "dist_error", "cosine_similarity", "parking", "parking_any"];
+    let aliases = ["link_id", "side", "class_nm", "confidence", "consist_id", "dist_error", "cosine_similarity", "parking", "parking_any"];
     let table = '<table>' +
         String(
         fields.map(
@@ -261,7 +261,7 @@
 });
                      
     
-            geo_json_1efa2042e84c6a769107d0929929266d.addTo(map_98d82e3f270caf4fd915786198d52b0e);
+            geo_json_66bafe5e556fe9a654e469424b0f1344.addTo(map_56b1e71602b2ea6ff9e86d8130156fb2);
         
 </script>
 </html>

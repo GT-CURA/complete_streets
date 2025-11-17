@@ -1,104 +1,120 @@
-# Street Parking Detection Pipeline
+# Automated Street Parking Detection
 
-This repository contains three Jupyter notebooks that together form a full pipeline for detecting parking signs, identifying parked vehicles, and finally, predicting street parking activities for each road segment.  
-The workflow is designed to be executed in the following order:
+## 📍 Objective
+This repository provides a **computer vision–based workflow** for detecting parking signs, identifying parked vehicles, and predicting on-street parking activity at the **road-segment level**.
+
 <img src="fig/fig1.png" alt="Street Parking Detection Workflow" width="500"/>
----
 
-## 1️⃣ 0_sign_detection.ipynb — Parking Sign Detection
+### Input:
+A GeoJSON file of road segment points. 
 
-### Purpose
-Detects parking signs from Google Street View (GSV) using a fine-tuned YOLO model.
+### Process:
+1. Download Google Street View images on both sides of a road segment in a 10 meter interval (the downloading process is automated).
+2. Detect **parking signs** using a *fine-tuned YOLO object detection* model.  
+<img src="fig/fig4.png" alt="Sign Detection" width="250"/>
 
-### Main Steps
-- Download GSV images of the sampled geographical point coordinates from `./../../step1_loader` and save them to `img/`.
-- Load trained YOLO model (`./model_sign_detection.pt`).
-- Read input images from `img/`.
-- Run inference to detect all visible parking signs.
-- Filter detections by confidence threshold (e.g., `> 0.3`).
+3. Detect **vehicles** and classify them as stationary or moving using *YOLO instance segmentation* and *geometric projection*.  
+<img src="fig/fig5.png" alt="Sign Detection" width="250"/>
 
-### Output Files
-- `sign_detection/` — annotated images with bounding boxes drawn for illustration purposes (optional).
-- `result_sign_detection.csv` — structured output of sign detection results for subsequent analyses (required).
+4. Merge sign and vehicle detections to classify each road segment as **Parking** or **No Parking**.
 
----
+### Output:
+- A CSV file (`result_street_parking.csv`) with **link_id** and **parking presence**.  
+- An interactive HTML map (`result_map.html`) visualizing the predicted parking conditions.
 
-## 2️⃣ 1_vehicle_detection.ipynb — Stationary Vehicle Detection
+<br>
+<br>
 
-### Purpose
-Detects vehicles parked along street segments to support inference of actual parking occupancy.
-<img src="fig/fig4.png" alt="Sign Detection" width="500"/>
+## 📦 Features
+- **`POINT_EPSG4326.geojson`**
+  Example input file (5 sample points in Atlanta). Replace with your own points of interest.
 
-### Main Steps
-#### vehicle instance segmentation
-- Load a pretrained YOLO segmentation model (`yolo11s-seg.pt`). No need to fine-tune because vehicles are one of the classes in the pretrained model.
-- Read and process input images from `img/`.
-- Extract segmentation masks for vehicles.
-#### vanishing point detection
-- Install the `neurvps` conda environment using `neurvps_env.yaml`.
-- Detect a vanishing point for each image containing vehicle masks.
-- Attach the detected vanishing point to the vehicle mask information.
-#### geometric projection
-- Identify parked vs. moving vehicles using geometric projection algorithms. The coordinates of vehicle masks on the next image will be projected by using vanishing points as reference points.
+– **`1_sign_detection.ipynb`**
+- Detects parking-related signs from GSV imagery using 
+- Intermediate output saved as `result_sign_detection.csv`   
 
-### Output Files
-- `result_vehicle_detection.csv` — each record includes the distance error of geometric projection and the cosine similarity of two masks capturing presumably identical vehicles.
+– **`2_vehicle_detection.ipynb`**
+- Detects vehicles and determines whether each of them stationary.
+- Intermediate output saved as `result_vehicle_detection.csv`   
 
----
+- **`3_seg_level_prediction.ipynb`**
+- Integrates sign and vehicle detections with road segments.  
+- Classifies each segment as **Parking** or **No Parking**.  
+- Final output saved as `result_street_parking.csv` and `result_map.html`  
 
-## 3️⃣ 2_seg_level_prediction.ipynb — Segment-Level Parking Prediction
+<br>
+<br>
 
-### Purpose
-Integrates the detection results from signs and vehicles to classify whether each road segment has *on-street parking* activities or not.
-<img src="fig/fig5.png" alt="Sign Detection" width="500"/>
+## 🚗 Quick Guide
+### 1. Install Conda Environments
 
-### Main Steps
-- Load input data:
-  - `result_sign_detection.csv`
-  - `result_vehicle_detection.csv`
-  - `LINE_EPSG4326.geojson` - GeoJSON of road segments extracted from the `./../../step1_loader` step.
-- Join detections to corresponding street segments using the `link_id` keys.
-- Assign `Parking` to road segments having either at least one `permit` sign or at least one parked vehicle and `No Parking` for the rest.
-
-### Output Files
-  - `result_map.html` — interactive map visualization.
-  - `result_street_parking.csv` — road segment-level predicted label (parking = True/False).
-
----
-
-## 🧭 Execution Order
-
-Run the notebooks **in order**:
-
-1. `0_sign_detection.ipynb` → generates sign detections  
-2. `1_vehicle_detection.ipynb` → generates vehicle detections  
-3. `2_seg_level_prediction.ipynb` → integrates both and outputs segment-level results  
-
----
-
-## ⚙️ Environment Setup
-
-You can create the Conda environment for the overall workflow using:
+#### Main workflow
 ```bash
-# under the workdir: step2_element/street_parking
-conda env create -f env_street_parking.yaml
-conda activate env_street_parking
-conda install -c conda-forge jupyterlab ipykernel # (don't skip this)
-# unset PYTHONPATH
-# python -m ipykernel install --user --name env_street_parking --display-name "Python (env_street_parking)"
+conda env create -f street_parking_env.yaml
+conda activate street_parking_env
+unset PYTHONPATH  # avoids PROJ/GDAL CRS errors
 ```
 
-You need to create a separate Conda environment, originially developed by Zhou et al. (2019), for the vanishing point detection step:
+Optional: To use jupyter notebook, execute the following
 ```bash
-# under the workdir: step2_element/street_parking
-# the following installation guide is quoted from Zhou et al. (2019)
-conda env create -f env_neurvps.yaml
-conda activate env_neurvps
-pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 --index-url https://download.pytorch.org/whl/cu121
+conda install -c conda-forge jupyterlab ipykernel
+python -m ipykernel install --user --name street_parking_env --display-name "Python (street_parking_env)"
 ```
-Download the checkpoint for neurvps (tmm17_checkpoint_latest.pth.tar) from Yichao Zhou's Hugging Face site (https://huggingface.co/yichaozhou/neurvps/blob/main/Pretrained/TMM17/checkpoint_latest.pth.tar). Save it under "./vehicle_detection/neurvps/checkpoint".
 
-Please ensure to cite Zhou et al. (2019)'s paper if you are using the vanishing point detection method! 
+#### NeurVPS Vanishing point detection 
+- A Python library developed by ![Zhou et al. (2019)](https://github.com/zhou13/neurvps).
+- Adopts Zhou et al. (2019)'s guide on `NeurVPS` installation.
+```bash
+conda env create -f neurvps_env.yaml # Please use the default env. name "neurvps_env"
+conda activate neurvps_env
+pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 \
+    --index-url https://download.pytorch.org/whl/cu121
+```
+
+### 2. Prepare Input Data
+- Place your point-of-interest or toy dataset (POINT_EPSG4326.geojson) in the working directory.
+- GSV images from your points-of-interest will be downloaded automatically through the `1_sign_detection.ipynb` script.
+
+### 3. Download Pretrained Weights
+#### Fine-tuned Sign Detection model checkpoint
+- Browser: 
+  Download from the Release asset:
+  https://github.com/GT-CURA/complete_streets/releases/download/v0.1.1/street_parking_sign_detection.pt
+
+- Terminal
+  ```bash
+  curl -L \
+  -o model_sign_detection.pt \
+  "https://github.com/GT-CURA/complete_streets/releases/download/v0.1.1/street_parking_sign_detection.pt"
+  ```
+
+#### Pre-trained NeurVPS checkpoint
+- Browser: 
+  Access to Zhou et al. (2019)'s Huggingface page
+  https://huggingface.co/yichaozhou/neurvps/blob/main/Pretrained/TMM17/checkpoint_latest.pth.tar
+
+  Save to: ./vehicle_detection/neurvps/checkpoint/
+
+  Please be sure to cite Zhou et al. (2019)'s paper if you are using the vanishing point detection method! 
+
+### 4. Run the Workflow
+Open Jupyter Lab:
+```bash
+jupyter lab
+```
+ 
+Run in the following order 
+- 1_sign_detection.ipynb
+- 2_vehicle_detection.ipynb
+- 3_seg_level_prediction.ipynbv
+
+Expected outputs:
+- result_street_parking.csv
+- result_map.html
+
+
+<br>
+<br>
 
 ## Reference
 - Yichao Zhou, Haozhi Qi, Jingwei Huang, Yi Ma. "NeurVPS: Neural Vanishing Point Scanning via Conic Convolution". NeurIPS 2019. https://doi.org/10.48550/arXiv.1910.06316

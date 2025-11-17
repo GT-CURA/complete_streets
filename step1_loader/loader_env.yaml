@@ -1,4 +1,4 @@
-name: env_loader
+name: loader_env
 channels:
   - defaults
   - conda-forge

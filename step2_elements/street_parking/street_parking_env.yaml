@@ -1,4 +1,4 @@
-name: env_street_parking
+name: street_parking_env
 channels:
   - pytorch
   - nvidia
@@ -316,4 +316,3 @@ dependencies:
       - tqdm==4.67.1
       - ultralytics==8.3.79
       - ultralytics-thop==2.0.14
-prefix: /home/jlee4338/anaconda3/envs/jlstpksign

@@ -1,4 +1,4 @@
-name: env_neurvps
+name: neurvps_env
 channels:
   - nvidia
   - conda-forge
@@ -249,8 +249,8 @@ dependencies:
       - markupsafe==2.1.5
       - mpmath==1.3.0
       - sympy==1.13.3
-      - torch==2.1.2+cu121
-      - torchvision==0.16.2+cu121
+      # should install the following two manually using pip
+      #- torch==2.1.2+cu121
+      #- torchvision==0.16.2+cu121
       - triton==2.1.0
       - typing-extensions==4.12.2
-prefix: /home/jlee4338/anaconda3/envs/neurvps
