@@ -1,66 +1,71 @@
-# Generate Points and Lines for Street-Level Image Sampling
+# Loading Road Segments from OSM
 
-This notebook (`generate_points_lines.ipynb`) creates spatial inputs—street segment lines and evenly spaced sampling points—for use in downstream street-level analyses such as parking sign or vehicle detection.
+## 📍 Objective
+This repository (`generate_points_lines.ipynb`) provides tools to retrieve spatial inputs for use in downstream analyses in `step2_elements` of this Complete Streets project. 
+<br>
 
----
-
-## Objective
-
-To prepare a set of **line** and **point geometries** that:
+Specifically, the codes prepare a set of **line** and **point geometries** that:
 - Represent road segments within the area of your choice.
 - Provide regularly spaced coordinates for downloading or analyzing Google Street View imagery 
-<img src="fig/fig1.png" alt="Road Segment Point Sampling Workflow" width="600">
----
+<br>
 
-## Workflow Overview
+Applied methods will depend on whether each road segment is a single or a dual carriageway.
+- **Single** carriageway: A road that has a single continuous surface or strip for traffic travelling in both directions, with no central reservation or physical barrier to separate opposing flows
+- **Dual** carriageway: A road where the traffic flowing in opposite directions is separated by a physical barrier or strip of land
+<p align="center"> <img src="fig/fig1.png" width="500
+" alt="Road Segment Point Sampling Workflow"> </p>
 
-### **1. Load Required Spatial Data**
-- Import road centerlines from OpenStreetMap (OSM) using `geopandas`, `shapely`, and `osmnx` libraries.
+### Input: 
+A GeoJSON file containing either:
+  - Road linestrings (`YOUR_ROADS.geojson`) or
+  - A study area polygon (`YOUR_STUDY_AREA.geojson`)
+### Output:
+  - A GeoJSON file for segmented road geometries (linestrings), named `LINES_EPSG4326` by default.
+  - A GeoJSON file for sampled GSV PanoID locations (points), named `POINTS_EPSG4326` by default.
+  
+<br>
+<br>
 
-### **2. Clean and Filter Road Network**
-- Keep relevant street types (e.g., primary, secondary, residential).
-- Reproject data to a *projected CRS* (e.g., EPSG:32616 in the Atlanta Metropolitan Region) for distance-based calculations.
+## Workflow 
+### 1. Load Required Spatial Data
+- Import a GeoJSON file containing road linestrings or a study area polygon.
 
-### **3. Segment Roads into Uniform Lengths**
-- Split long road geometries into segments and select a single, representative 30-meter segment.
+### 2. Clean and Filter Road Network
+- Keep relevant road types according to the `highway` hierarchy in OSM (e.g., primary, secondary, residential).
+- Reproject data to a projected CRS (e.g., EPSG:32616 in the Atlanta Metropolitan Region) for distance-based calculations.
 
-### **4. Generate Sample Points Along Segments**
+### 3. Segment Roads into Uniform Lengths
+- Select a single 30-meter segment in the middle for long road geometries.
+
+### 4. Generate Sample Points Along Segments
 - Compute points at an equal interval of 5-meter along each segment’s geometry.
 - Make a GSV metadata API call to retrieve the geographical coordinates (longitude, latitude) of each sampled point.
 - Deduplicate the points and save ones with unique geographical coordinates
-- Assign unique `point_id`s for the filtered points.
+- Assign unique `point_id`s for the filtered points. These points will be in a 10-meter interval on average.
 
-### **5. Export Results**
+### 5. Export Results
 - Save generated features for use in later workflows:
-  - `points.geojson` or `points.csv` — sampling locations.
-  - `lines.geojson` — segmented road geometries.
 
----
+<br>
+<br>
 
-## 📁 Output Files
+## 🚗 Quick Guide
+### 1. Install Conda Environments
+  ```bash
+  conda env create -f loader_env.yaml
+  conda activate loader_env
+  unset PYTHONPATH  # avoids PROJ/GDAL CRS errors
 
-| File | Description |
-|------|--------------|
-| `LINE_EPSG4326.geojson`  | Segmented street line geometries |
-| `POINTS_EPSG4326.geojson` | Evenly spaced sample points along street segments |
-| (optional) `map_points_lines.html` | Interactive visualization of results |
+  # Optional: To use jupyter notebook, execute the following
+  conda install -c conda-forge jupyterlab ipykernel
+  python -m ipykernel install --user --name loader_env --display-name "Python (loader_env)"
+  ```
 
----
-
-## Example Use Cases
-
-- **Street-level image collection:** Query Google Street View or Mapillary imagery at each sampled point.  
-- **Infrastructure audits:** Define observation units for sidewalk or signage detection models.  
-- **Parking detection workflows:** Feed generated points into image-based detection pipelines (e.g., YOLO models for sign and vehicle detection).
-
----
-
-## ⚙️ Dependencies
-
-Core Python packages typically used in this notebook:
-```bash
-geopandas
-shapely
-osmnx
-pandas
-folium
+### 2. Run the Workflow
+1. Open Jupyter Lab:
+    ```bash
+    jupyter lab
+    ```
+ 
+2. Run the following script 
+  - generate_points_lines.ipynb
