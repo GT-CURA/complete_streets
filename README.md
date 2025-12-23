@@ -13,16 +13,17 @@ Several street elements (i.e., sidewalk, street buffer, bike lane, street parkin
 <br>
 
 # ✨ Features
-## 1. step1_loader — *Road Segment Preparation*
+## 1. step1_loader: *Road Segment Preparation*
 Preprocesses input road geometries to generate point- and line-based representations of target street segments. 
 These outputs serve as the spatial backbone for element-level data collection in subsequent steps.
 
-## 2. step2_elements - *Element-Level Data Collection*
+## 2. step2_elements: *Element-Level Data Collection*
 Each subfolder corresponds to one Complete Street element and contains tools to collect presence and attribute.
 - Each element may require a specific data source, model, or conda environment. Please refer to the `README.md` in each subfolder for detailed instructions.
 - Users may skip any element if equivalent datasets are already available or preferred.
+- `POINT_EPSG4326.geojson` is a sample dataset provided to help users perform a preliminary analysis and better understand the workflow.
 
-## 3. step3_score - *Composite Score Construction*
+## 3. step3_score: *Composite Score Construction*
 Aggregates element-level outputs from Step 2 to compute a final Complete Street score.
 - We provide scoring rules and weights for each element.
 - Element scores are normalized and combined to produce a composite score on a 0–100 scale.
@@ -33,7 +34,7 @@ Aggregates element-level outputs from Step 2 to compute a final Complete Street 
 ```
 complete-street/
 │
-├── README.md # High-level description
+├── README.md    # High-level description
 ├── LICENSE
 │
 │
@@ -43,7 +44,7 @@ complete-street/
 │   └── generate_points_lines.ipynb
 │
 │
-├── step2_elements/           #  # Element-specific pipelines
+├── step2_elements/    # Element-specific pipelines
 │   ├── amenities/
 │   │   ├── README.md
 │   │   └── amenities_weigths.csv
