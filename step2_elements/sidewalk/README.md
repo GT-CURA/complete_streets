@@ -115,7 +115,6 @@ From the `utils_automation` directory, execute the main script from your termina
 For details about the methodology, please find the [paper](https://doi.org/10.1177/23998083251369602).
 
 <br>
-<br>
 
 ### References
 If you use this methodology or code, please cite: 
