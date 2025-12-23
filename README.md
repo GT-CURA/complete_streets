@@ -20,6 +20,7 @@ These outputs serve as the spatial backbone for element-level data collection in
 ## 2. step2_elements: *Element-Level Data Collection*
 Each subfolder corresponds to one Complete Street element and contains tools to collect presence and attribute.
 - Each element may require a specific data source, model, or conda environment. Please refer to the `README.md` in each subfolder for detailed instructions.
+- If Google Street View or satellite imagery is needed, set up an API key via the Google Cloud Console (read [instruction](https://support.google.com/googleapi/answer/6158841)) and enable the relevant APIs (e.g., Street View Static API for downloading Street View imagery). Free usage is limited by monthly quotas.
 - Users may skip any element if equivalent datasets are already available or preferred.
 - `POINT_EPSG4326.geojson` is a sample dataset provided to help users perform a preliminary analysis and better understand the workflow.
 
