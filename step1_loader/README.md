@@ -1,5 +1,3 @@
-# Loading Road Segments from OSM
-
 ## 📍 Objective
 This repository generates spatial inputs used in downstream analyses in `step2_elements` for collecting Complete Street element presence and attributes.
 
