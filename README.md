@@ -12,7 +12,7 @@ Several street elements (i.e., sidewalk, street buffer, bike lane, street parkin
 
 <br>
 
-👉 Please visit our <a href="https://gt-cura.github.io/complete_streets_web/">project website fto explore the full methodology, interactive maps, and additional details
+👉 Please visit our <a href="https://gt-cura.github.io/complete_streets_web/">project website</a> to explore the full methodology, interactive maps, and additional details
 
 # ✨ Features
 ## 1. step1_loader: *Road Segment Preparation*
