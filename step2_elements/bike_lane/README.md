@@ -101,10 +101,18 @@ The model's architecture is defined by three key dimensions: a late-stage concat
     - Presence Detection: The first stage determines if a bike lane of any type is present.
     - Type Classification: If a bike lane is detected, the second stage classifies it as either designated or protected.
 
-For details on the training process and ablation studies across three architectural dimensions (concatenation stage, fusion strategy, and label structure) see the paper([link](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5599538)). The code and dataset used for training are available in the `train` subfolder.
+For details on the training process and ablation studies across three architectural dimensions (concatenation stage, fusion strategy, and label structure) see the paper([link](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5599538](https://doi.org/10.1016/j.rsase.2025.101817))). The code and dataset used for training are available in the `train` subfolder.
 
 <br>
 <br>
 
 ## References
 If you use this model, please cite the following paper:
+
+```bibtex
+@article{lieu_2026_bike_lane,
+  title   = {Automated detection and classification of bike lanes using multimodal imagery},
+  author  = {Lieu, S. J., Koo, B. W., Hwang, U., & Guhathakurta, S.},
+  journal = {Remote Sensing Applications: Society and Environment},
+  year    = {2026}
+}
