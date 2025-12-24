@@ -1,7 +1,5 @@
 For details on the scoring framework, please refer to Pages 5 and 6 of our <a href="https://gt-cura.github.io/complete_streets_web/">project website</a>
 
-<br>
-
 ### Page 5 (Weight Assignment)
 Explains how weights are assigned to each Complete Street element based on their relative contributions to Complete Streets principles.
 
