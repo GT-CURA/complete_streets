@@ -10,9 +10,9 @@ The workflow identifies and measures eight key Complete Street elements, then in
 
 Several street elements (i.e., sidewalk, street buffer, bike lane, street parking, and transit stop) are measured using street view or aerial imagery combined with computer vision techniques, while other elements rely on open GIS or OSM datasets.
 
-<br>
-
 👉 Please visit our <a href="https://gt-cura.github.io/complete_streets_web/">project website</a> to explore the full methodology, interactive maps, and additional details
+
+<br>
 
 # ✨ Features
 ## 1. step1_loader: *Road Segment Preparation*
