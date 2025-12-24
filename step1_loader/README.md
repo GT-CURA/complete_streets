@@ -1,5 +1,3 @@
-# Loading Road Segments from OSM
-
 ## 📍 Objective
 This repository generates spatial inputs used in downstream analyses in `step2_elements` for collecting Complete Street element presence and attributes.
 
@@ -16,7 +14,7 @@ Applied methods will depend on whether each road segment is a single or a dual c
 ### Input: 
 A GeoJSON file containing either:
   - Road geometries (type: `LineString`) - `YOUR_ROADS.geojson` or
-  - A study area boundary (type: `Polygon`) `YOUR_STUDY_AREA.geojson`
+  - A study area boundary (type: `Polygon`) - `YOUR_STUDY_AREA.geojson`
 
 ### Output:
   - A GeoJSON file of processed road segment geometries (`LineString`), named `LINES_EPSG4326` by default.
@@ -49,7 +47,7 @@ A GeoJSON file containing either:
 <br>
 
 ## 🚗 Quick Guide
-### 1. Install the Conda Environments
+### 1. Install the Conda Environment
   ```bash
   conda env create -f loader_env.yaml
   conda activate loader_env
@@ -61,12 +59,12 @@ A GeoJSON file containing either:
   ```
 
 ### 2. Run the Workflow
-1. Open Jupyter Lab:
-    ```bash
-    jupyter lab
-    ```
+#### 1. Open Jupyter Lab:
+  ```bash
+  jupyter lab
+  ```
  
-2. Run the following script
-    ```bash
-    generate_points_lines.ipynb
-    ```
+#### 2. Run the following script
+  ```bash
+  generate_points_lines.ipynb
+  ```

@@ -101,24 +101,35 @@ pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 \
 - Please ensure to cite Zhou et al. (2019)'s paper if you are using the vanishing point detection method.
 
 ### 4. Run the Workflow
-1. Open Jupyter Lab:
+#### 1. Open Jupyter Lab:
     ```bash
     jupyter lab
     ```
  
-2. Run in the following order 
+#### 2. Run in the following order 
   - 1_sign_detection.ipynb
   - 2_vehicle_detection.ipynb
   - 3_seg_level_prediction.ipynb
 
-3. Expected outputs:
+#### 3. Expected outputs:
   - result_street_parking.csv
   - result_map.html
 
 <br>
 <br>
 
-### Reference
+## 🔎 Descriptions
+For details about the methodology, please find the [paper]().
+
+<br>
+
+### References
 If you use this methodology or code, please cite: 
 
-- Yichao Zhou, Haozhi Qi, Jingwei Huang, Yi Ma. "NeurVPS: Neural Vanishing Point Scanning via Conic Convolution". NeurIPS 2019. https://doi.org/10.48550/arXiv.1910.06316
+```bibtex
+@article{lee_,
+  title   = {},
+  author  = {Lee, J., Hwang, U., & Guhathakurta, S.},
+  journal = {},
+  year    = {}
+}

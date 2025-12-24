@@ -5,8 +5,6 @@ This repository explains the process of estimating the **number of lanes** for e
 
 The algorithm in `step1_loader/generate_points_lines.ipynb` retrieves road linestrings and determines the total number of lanes per segment by summing the OSM `lanes` attributes. Detail proceesses are described as follow.
 
-<br>
-
 ### Input
 The same input used in `generate_points_lines.ipynb`, typically a GeoJSON file containing:
   - Road LineString geometries (`YOUR_ROADS.geojson`) or
@@ -26,7 +24,6 @@ A CSV file showing the number of vehicular lanes for each road segment (`lanes_c
 ### 2. Preprocess Network Data  
    - Compute directional bearings for each edge (`ox.bearing.add_edge_bearings`).  
    - Project the graph into an appropriate UTM CRS for spatial distance operations.  
-
 ### 3. Find Nearest Edges
    - Calculate Euclidean distance between each road edge and the COI.  
    - Keep the two closest edges (`edges_nearest`) as potential carriageway pairs.  

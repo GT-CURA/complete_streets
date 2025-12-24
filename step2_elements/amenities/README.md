@@ -1,20 +1,23 @@
 # Evaluation of Accessibility to Amenities
 
-
 ## 📍 Objective
 This repository provides a framework to evaluate accessibility to daily amenities (i.e., points of interest) for given road segments. It demonstrates how to derive a composite accessibility index that accounts for amenity density, amenity importance, and road length through four main steps.
 
-- **Input:**
-  1. A GeoJSON file of road segment points.
-  2. CSV table defining amenity-type weights (based on NACIS codes and behavioral factors).
-- **Process:**  
+### Input:
+  - A GeoJSON file of road segment points.
+  - CSV table defining amenity-type weights (based on NACIS codes and behavioral factors).
+
+### Process:
   1. Generate walksheds (reachable areas) around each road segment point.
   2. Collect daily points of interest (POIs) within each walkshed.
   3. Assign weighted values to POIs using standardized popularity, intensity, and operating hour metrics.
   4. Aggregate the weighted POIs into a composite accessibility score that reflects both POI density and road length
-- **Output:**  
+
+### Output:
   - The composite accessibility score for each road segment.
 
+<br>
+<br>
 
 ## 📦 Features:
 - **`amenities_weigths.csv`**  
@@ -112,4 +115,12 @@ For each road segment i:
 This formulation balances amenity density with segment length.
 
 ### References
-If you use this model, please cite the following paper:
+If you use this methodology or code, please cite:
+
+```bibtex
+@article{,
+  title   = {},
+  author  = {Lieu, S. J., Lee, J., Jones, B., Synn, S., & Guhathakurta, S.},
+  journal = {},
+  year    = {}
+}
