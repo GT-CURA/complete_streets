@@ -12,6 +12,11 @@ Several street elements (i.e., sidewalk, street buffer, bike lane, street parkin
 
 <br>
 
+<p style="color:#1f6feb; font-weight:600;">
+  👉 Please visit our <a href="https://gt-cura.github.io/complete_streets_web/">project website</a>
+  to explore the full methodology, interactive maps, and additional details.
+</p>
+
 # ✨ Features
 ## 1. step1_loader: *Road Segment Preparation*
 Preprocesses input road geometries to generate point- and line-based representations of target street segments. 
