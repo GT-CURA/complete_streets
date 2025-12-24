@@ -8,7 +8,7 @@ This repository provides tools to compute transit accessibility scores along roa
 Outputs include an interactive Folium map and structured CSV/GeoJSON files at the link level.
 
 ### Input
-- A GeoJSON file of road segment representing road segment links (EPSG:4326)
+- A GeoJSON file of road segments links (EPSG:4326) along with:
 
 - One or more GTFS`.zip` files
 - A GeoJSON file of road segment points
@@ -32,15 +32,18 @@ Outputs include an interactive Folium map and structured CSV/GeoJSON files at th
 
 ## 📦 Features
 - **`LINE_EPSG4326.geojson`**
-  Example input file (5 sample points in Atlanta). Replace with your own streets of interest.
+  - Example input file (5 sample points in Atlanta).
+  - Replace with your own streets of interest.
 - **`POINT_EPSG4326.geojson`**
-  Example input file (5 sample points in Altanta). Replace with your own points of interest.
+  - Example input file (5 sample points in Altanta).
+  - Replace with your own points of interest.
 - **`Metropolitan Atlanta Rapid Transit Authority (MARTA).zip`**
-  Example input file (GTFS of MARTA: Atlanta region transit provider). Replace with your own GTFS of interest.
+  - Example input file (GTFS of MARTA: Atlanta region transit provider).
+  - Replace with your own GTFS of interest.
 - **`output/`**
-  Automatically created folder for storing results.
+  - Automatically created folder for storing results.
 - **`scripts/run_pipeline.py`**
-  Python script to
+  - Main script for executing the full pipeline.
 
 <br>
 <br>
