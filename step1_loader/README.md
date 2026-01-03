@@ -1,9 +1,9 @@
 ## 📍 Objective
 This repository generates spatial inputs used in downstream analyses in `step2_elements` for collecting Complete Street element presence and attributes.
 
-The code (`generate_points_lines.ipynb`) prepares a set of **line** and **point geometries** that:
-- Represent road segments within a user-defined study area.
-- Represent regularly spaced coordinates for downloading and analyzing Google Street View imagery 
+The jupyter notebook (`generate_points_lines.ipynb`) prepares a set of **line** and **point geometries** that:
+- represent road segments within a user-defined study area.
+- represent regularly spaced coordinates for downloading and analyzing Google Street View imagery. 
 
 Applied methods will depend on whether each road segment is a single or a dual carriageway.
 - **Single** carriageway: A road with a single continuous surface carrying traffic in both directions, without a median separating flows
@@ -17,8 +17,8 @@ A GeoJSON file containing either:
   - A study area boundary (type: `Polygon`) - `YOUR_STUDY_AREA.geojson`
 
 ### Output:
-  - A GeoJSON file of processed road segment geometries (`LineString`), named `LINES_EPSG4326` by default.
-  - A GeoJSON file of regularly spaced sampling points with valid GSV panorama locations (`Point`), named `POINTS_EPSG4326` by default.
+  - A GeoJSON file of processed road segment geometries in CRS EPSG:4326, named `LINES_EPSG4326.geojson` by default.
+  - A GeoJSON file of regularly spaced sampling points in CRS EPSG:4326 with GSV Panorama IDs, named `POINTS_EPSG4326.geojson` by default.
   
 <br>
 <br>
@@ -28,20 +28,20 @@ A GeoJSON file containing either:
 - Import a GeoJSON file containing road linestrings or a study area polygon.
 
 ### 2. Clean and Filter Road Network
-- Keep relevant road types according to the `highway` hierarchy in OSM (e.g., primary, secondary, residential).
+- Keep relevant road types according to the `highway` hierarchy in OSM (e.g., primary, secondary, tertiary, residential). Adjust the filtering list if necessary.
 - Reproject data to a projected CRS (e.g., EPSG:32616 in the Atlanta Metropolitan Region) for distance-based calculations.
 
 ### 3. Segment Roads into Uniform Lengths
 - For long road geometries, extract a representative 30-meter segment from the center of each road.
 
 ### 4. Generate Sample Points Along Segments
-- Generate points at 5-meter intervals along each road segment.
-- Query the Google Street View Metadata API to retrieve valid panorama locations.
-- Deduplicate the points and save ones with unique geographical coordinates
-- Assign unique `point_id`s for the filtered points. These points will be in a 10-meter interval on average.
+- Generate points at 5-meter intervals along each road segment. Each point is temporarily referred to as a Coordinate of Interest (`COI`) in the subsequent querying process.
+- Query the GSV Metadata API for each `COI` to retrieve valid panorama locations.
+- Deduplicate the points and save ones with unique geographical coordinates.
+- Assign unique `point_id`s for the filtered points from the start point to the end point of each road segment. These points will be in a 10-meter interval on average.
 
 ### 5. Export Results
-- Save processed road segments and sampling points for use in subsequent element-level workflows.
+- Save processed road segments and Pano ID points for use in subsequent workflows in `step2_elements`.
 
 <br>
 <br>
