@@ -4,7 +4,7 @@ This repository provides code, workflows, and example datasets for evaluating Co
 
 The workflow identifies and measures eight key Complete Street elements, then integrates them into a composite Complete Street score using metrics informed by established Complete Streets design guidelines. The goal is to enable scalable evaluation of street conditions across cities.
 
-<p align="left"> <img src="step1_loader/fig/workflow.png" alt="Workflow" width="1280"> </p>
+<p align="left"> <img src="step1_loader/fig/GraphicalAbstract.jpg" alt="Workflow" width="1280"> </p>
 
 <br>
 
