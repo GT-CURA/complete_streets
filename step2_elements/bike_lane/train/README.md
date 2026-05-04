@@ -25,12 +25,12 @@ The model was trained using the following environment and hyperparameters.
 |                          | Seeds                     | 5 random seeds (2023-2027) to account for stochastic variation; results reported as mean ± std     |
 
 ## Dataset
-The model was trained on a custom-built, geographically diverse dataset. The completed dataset encompasses 1,459 unique street segments across 28 U.S. cities, broken down as follows:
-- 764 locations with no bike lanes
-- 459 with designated bike lanes
-- 236 with protected bike lanes
+The model was trained on a custom-built, geographically diverse dataset. The completed dataset encompasses 1,800 unique street segments across 28 U.S. cities, broken down as follows:
+- 1,036 locations with no bike lanes
+- 526 with designated bike lanes
+- 238 with protected bike lanes
 
-With three images per location (two street-level, one satellite), the dataset contains 4,377 total images.
+With three images per location (two street-level, one satellite), the dataset contains 5,400 total images.
 
 For model training, the data was split into training and validation sets using an approximate 7:3 ratio. The training sets for protected and designated bike lanes were upsampled to address class imbalance. The `TRAIN.csv` file defines the samples used for training, while `VAL.csv` defines the validation set.
 
